@@ -79,8 +79,17 @@
   #knob { position:absolute; left:34px; top:34px; width:52px; height:52px; border-radius:50%; background:rgba(244,236,220,.85); box-shadow:0 4px 14px rgba(0,0,0,.35); }
   #actBtn { position:fixed; left:50%; bottom:calc(var(--safe-bot) + 84px); transform:translateX(-50%); z-index:6; height:54px; padding:0 26px; border-radius:27px;
     background:linear-gradient(180deg,#f6e6bd,#d6b26a); color:var(--ink); font-weight:800; font-size:18px; box-shadow:0 8px 24px rgba(0,0,0,.4); animation:pop .35s; white-space:nowrap; }
+  #card { position:fixed; left:12px; right:12px; bottom:calc(var(--safe-bot) + 16px); z-index:30; background:#f4ecdc; color:var(--ink); border-radius:18px; padding:16px 18px 14px; box-shadow:0 12px 36px rgba(0,0,0,.45); }
+  #card.in { animation:up .25s ease-out; }
+  #cardName { font-family:'Fraunces',serif; font-weight:800; font-size:20px; margin-bottom:4px; padding-right:36px; }
+  #cardText { font-size:16px; line-height:1.4; } #cardText b { color:#5b2a6b; }
+  #cardOpts { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; } #cardOpts:empty { display:none; }
+  #cardOpts button { height:44px; padding:0 18px; border-radius:22px; background:linear-gradient(180deg,#f6e6bd,#d6b26a); color:var(--ink); font-weight:800; font-size:15px; }
+  #cardX { position:absolute; right:10px; top:10px; width:34px; height:34px; border-radius:50%; background:rgba(0,0,0,.07); color:var(--ink); font-size:16px; }
+  .heart { position:fixed; z-index:8; pointer-events:none; color:#ff6b8a; font-size:24px; animation:heart 1.4s ease-out forwards; text-shadow:0 2px 6px rgba(0,0,0,.3); }
+  @keyframes heart { from { transform:translate(-50%,0) scale(.6); opacity:1; } to { transform:translate(-50%,-90px) scale(1.2); opacity:0; } }
 </style>
-  <script type="module" crossorigin src="./assets/index-PtRegdKh.js"></script>
+  <script type="module" crossorigin src="./assets/index-BzasB0rL.js"></script>
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -96,6 +105,7 @@
 <div id="fridgeP" class="sheet hidden"><button class="x" id="fridgeClose">✕</button><h2>The fridge</h2><p class="sub" id="fridgeNote"></p><div id="fridgeList"></div></div>
 <div id="story" class="hidden"><div id="storyWho"></div><div id="storyText"></div></div>
 <div id="mapP" class="hidden"><canvas id="mapCanvas"></canvas><button id="mapClose">Close the map</button></div>
+<div id="card" class="hidden"><button id="cardX">✕</button><div id="cardName"></div><div id="cardText"></div><div id="cardOpts"></div></div>
 <div id="flash"></div>
 <div id="loading">Opening the front door…</div>
 <div id="intro" class="hidden"><div class="card"><div class="kicker">Keira &amp; Mila's</div><h1>Outrageous Adventure</h1><p>This is a normal house. Mostly. Somewhere in here are hidden rooms, and the hidden rooms have doors to other worlds.</p><button id="introGo">Look around</button></div></div>
