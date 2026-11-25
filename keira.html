@@ -180,9 +180,35 @@
   #toast { background: rgba(14,12,34,.9); border: 1px solid #7fd6c4; }
   .pop { -webkit-text-stroke: 1.5px #0c0a1e; }
   .pop.boost { color: #ffc66b; } .pop.perfect { color: #7fffe0; } .pop.boing { color: #c8b4ff; }
+
+  /* ---------- tag team & combo ---------- */
+  #boostPip { bottom: calc(var(--safe-bot) + 92px); font-size: 15px; padding: 6px 14px; }
+  #boostPip.ready { background: rgba(14,12,34,.7); color: #ffc66b; box-shadow: 0 0 16px -2px #ffb04a; border: 1.5px solid #ffc66b; }
+  #boostPip.tagme { opacity: 1; background: rgba(14,12,34,.7); color: #7fffe0; border: 1.5px solid #7fffe0; box-shadow: 0 0 16px -2px #7fffe0; animation: pulse .7s infinite; }
+  #hint { bottom: calc(var(--safe-bot) + 136px); }
+  #team { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(var(--safe-bot) + 14px); display: flex; gap: 12px; z-index: 7; }
+  #team button { width: 74px; height: 64px; border-radius: 20px; background: rgba(14,12,34,.66); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    border: 1.5px solid currentColor; opacity: .55; font: 15px 'Lilita One', sans-serif; letter-spacing: .5px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 1px; transition: transform .12s, opacity .12s, box-shadow .12s; touch-action: none; padding: 0; }
+  #team button b { font-size: 26px; line-height: 1; font-weight: 400; text-shadow: 0 0 10px currentColor; }
+  #team button i { font-style: normal; font-size: 18px; line-height: 10px; height: 10px; letter-spacing: 2px; }
+  #team button.ready { opacity: .9; }
+  #team button.on { opacity: 1; transform: translateY(-6px) scale(1.06); box-shadow: 0 0 22px -4px currentColor, inset 0 0 18px -8px currentColor; }
+  #team .keira { color: #c8b4ff; } #team .mila { color: #7fffe0; } #team .george { color: #ffc66b; }
+  #combo { position: fixed; right: 14px; top: calc(var(--safe-top) + 64px); z-index: 6; pointer-events: none; text-align: center; }
+  #combo b { display: block; font: 34px 'Lilita One', sans-serif; color: #7fffe0; text-shadow: 0 0 14px rgba(95,255,224,.7), 0 3px 0 #0c0a1e; }
+  #combo span { display: block; height: 4px; border-radius: 4px; background: #7fffe0; box-shadow: 0 0 8px #7fffe0; margin: 2px auto 0; width: 100%; }
+  #curse { position: fixed; left: 50%; transform: translateX(-50%); top: calc(var(--safe-top) + 78px); z-index: 6; pointer-events: none;
+    font: 15px 'Lilita One', sans-serif; letter-spacing: 1px; color: #ff8a96; padding: 4px 12px; border-radius: 99px; background: rgba(30,6,16,.6); border: 1px solid #ff5a6a; box-shadow: 0 0 14px -3px #ff5a6a; }
+  body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 5; opacity: 0; transition: opacity .8s;
+    background: radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(120,0,30,.45) 100%); }
+  body.stare::after { opacity: 1; animation: pulse 1.6s infinite; }
+  .pop.eye { color: #ff8a96; font-size: 30px; text-shadow: 0 0 16px rgba(255,60,80,.8), 0 3px 0 #0c0a1e; }
+  .pop.eyehint { color: #fff; font: 700 18px 'Fredoka', sans-serif; -webkit-text-stroke: 0; text-shadow: 0 2px 6px #000; animation-duration: 2.2s; }
+  .pop.tag { color: #fff; font-size: 24px; } .pop.combo { color: #7fffe0; font-size: 30px; }
 </style>
   <script type="module" crossorigin src="./assets/bob-Bhz6UI8P.js"></script>
-  <script type="module" crossorigin src="./assets/main-DSu_zhrN.js"></script>
+  <script type="module" crossorigin src="./assets/main-Ca7wqcMX.js"></script>
 </head>
 <body data-edition="bday">
 <canvas id="c"></canvas>
@@ -198,9 +224,9 @@
 <div id="menu">
   <button id="play" class="hidden">PLAY</button>
   <div class="pick">
-    <button id="playKeira" class="big kid keira">KEIRA<small>Sparkle spell</small></button>
-    <button id="playGeorge" class="big kid george">GEORGE<small>Snooze cruise</small></button>
-    <button id="playMila" class="big kid mila">MILA<small>Bubble gum</small></button>
+    <button id="playKeira" class="big kid keira">KEIRA<small>Freeze spell</small></button>
+    <button id="playGeorge" class="big kid george">GEORGE<small>Ground pound</small></button>
+    <button id="playMila" class="big kid mila">MILA<small>Double splits</small></button>
   </div>
   <div class="row">
     <button id="skinsBtn" class="hidden">SKINS</button>
@@ -218,6 +244,13 @@
   <div class="chip"><span class="nut"></span><span id="hudBolts">0</span></div>
   <div id="boostPip">ROCKET READY</div>
 </div>
+<div id="team" class="hidden">
+  <button data-i="0" class="keira" aria-label="Tag in Keira"><b>K</b>KEIRA<i>•</i></button>
+  <button data-i="1" class="mila" aria-label="Tag in Mila"><b>M</b>MILA<i>••</i></button>
+  <button data-i="2" class="george" aria-label="Tag in George"><b>G</b>GEORGE<i>•</i></button>
+</div>
+<div id="curse" class="hidden"></div>
+<div id="combo" class="hidden"><b>x2</b><span></span></div>
 <div id="hint" class="hidden">Drag to steer · Tap to fire your rocket boots</div>
 
 <div id="pops" class="layer"></div>
