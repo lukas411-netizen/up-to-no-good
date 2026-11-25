@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#15111c">
+<title>The House</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#1b1424; --paper:#f4ecdc; --gold:#d6b26a; --plum:#3a2340; --teal:#2f6b63; --safe-top: env(safe-area-inset-top,0px); --safe-bot: env(safe-area-inset-bottom,0px); }
+  * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; user-select:none; -webkit-user-select:none; }
+  html,body { margin:0; height:100%; overflow:hidden; background:#15111c; touch-action:none; overscroll-behavior:none; font-family:'Nunito',system-ui,sans-serif; color:var(--paper); }
+  #c { position:fixed; inset:0; width:100%; height:100%; display:block; }
+  .hidden { display:none !important; }
+  button { font-family:inherit; border:0; cursor:pointer; color:inherit; }
+  .pill { position:fixed; top:calc(var(--safe-top) + 12px); height:40px; padding:0 14px; border-radius:20px; display:flex; align-items:center; gap:8px;
+    background:rgba(22,16,30,.72); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(214,178,106,.35); font-weight:800; font-size:17px; z-index:5; }
+  #wallet { left:12px; }
+  #wallet.pop { animation:pop .5s; }
+  @keyframes pop { 40% { transform:scale(1.18); } }
+  .cn { display:inline-block; width:18px; height:18px; border-radius:50%; background:radial-gradient(circle at 35% 35%,#f3b27a,#c8733a 55%,#8a4a22); box-shadow:inset 0 0 0 2px rgba(90,40,10,.35); vertical-align:-3px; margin-right:5px; }
+  #who { right:12px; font-family:'Fraunces',serif; font-size:16px; }
+  #who::before { content:''; width:14px; height:14px; border-radius:50%; background:#7a2e3a; box-shadow:0 0 0 2px rgba(255,255,255,.25); }
+  #who[data-hero=mila]::before { background:#e8a33d; }
+  #who::after { content:'⇄'; opacity:.55; font-size:14px; }
+  #buddy { left:12px; top:calc(var(--safe-top) + 58px); height:30px; font-size:13px; font-weight:600; opacity:.9; }
+  #toast { position:fixed; left:50%; top:calc(var(--safe-top) + 100px); width:min(88vw,420px); transform:translate(-50%,-8px); opacity:0; transition:.35s; pointer-events:none;
+    background:rgba(244,236,220,.96); color:var(--ink); border-radius:16px; padding:14px 16px; font-size:16px; line-height:1.35; box-shadow:0 10px 30px rgba(0,0,0,.35); z-index:6; }
+  #toast.show { opacity:1; transform:translate(-50%,0); }
+  #toast b { color:#5b2a6b; }
+  #bottom { position:fixed; left:0; right:0; bottom:calc(var(--safe-bot) + 18px); display:flex; justify-content:center; gap:12px; z-index:5; pointer-events:none; }
+  #bottom button { pointer-events:auto; height:52px; padding:0 22px; border-radius:26px; font-weight:800; font-size:17px; box-shadow:0 8px 24px rgba(0,0,0,.35); }
+  #shopBtn { background:var(--paper); color:var(--ink); }
+  #jumpBtn { background:linear-gradient(135deg,#7a3cff,#2fd4ff); color:#fff; animation:glow 1.6s infinite; }
+  @keyframes glow { 50% { box-shadow:0 0 30px rgba(122,60,255,.8); } }
+  .sheet { position:fixed; left:0; right:0; bottom:0; padding:18px 16px calc(var(--safe-bot) + 18px); background:var(--paper); color:var(--ink); border-radius:22px 22px 0 0;
+    box-shadow:0 -10px 40px rgba(0,0,0,.45); z-index:8; max-height:70vh; overflow:auto; animation:up .3s ease-out; touch-action:pan-y; }
+  @keyframes up { from { transform:translateY(40%); opacity:0; } }
+  .sheet h2 { font-family:'Fraunces',serif; margin:0 0 4px; font-size:24px; }
+  .sheet .sub { margin:0 0 12px; opacity:.65; font-size:14px; }
+  .sheet .x { position:absolute; right:12px; top:12px; width:36px; height:36px; border-radius:50%; background:rgba(0,0,0,.08); color:var(--ink); font-size:18px; }
+  .row { display:flex; width:100%; justify-content:space-between; align-items:center; gap:10px; text-align:left; padding:12px 14px; margin:6px 0; border-radius:14px; background:#fff; color:var(--ink); font-size:16px; box-shadow:0 1px 0 rgba(0,0,0,.08); }
+  .row small { display:block; opacity:.6; font-size:13px; font-weight:600; margin-top:2px; }
+  .row .price { white-space:nowrap; font-weight:800; }
+  .row.owned { opacity:.55; }
+  .tip { opacity:.55; font-size:13px; margin:10px 2px 0; }
+  #zzz { position:fixed; left:0; top:0; pointer-events:none; font-family:'Fraunces',serif; font-weight:800; color:rgba(244,236,220,.8); font-size:15px; z-index:4; transition:opacity .3s; }
+  #zzz span { position:absolute; animation:z 2.4s infinite; opacity:0; }
+  #zzz span:nth-child(2) { animation-delay:.8s; font-size:12px; } #zzz span:nth-child(3) { animation-delay:1.6s; font-size:10px; }
+  @keyframes z { 0% { transform:translate(0,0); opacity:0; } 20% { opacity:1; } 100% { transform:translate(18px,-40px); opacity:0; } }
+  #flash { position:fixed; inset:0; background:radial-gradient(circle,#fff,#b9a3ff 40%,#2a0b4a); opacity:0; pointer-events:none; transition:opacity .4s; z-index:20; }
+  #flash.on { opacity:1; }
+  #loading, #intro { position:fixed; inset:0; display:grid; place-items:center; background:radial-gradient(circle at 50% 40%,#2c2140,#120d18); z-index:30; text-align:center; padding:24px; }
+  #loading { font-family:'Fraunces',serif; font-size:22px; opacity:.85; }
+  #intro { background:rgba(12,9,16,.55); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); }
+  .card { max-width:360px; }
+  .card .kicker { letter-spacing:.2em; text-transform:uppercase; font-size:12px; opacity:.7; }
+  .card h1 { font-family:'Fraunces',serif; font-weight:800; font-size:40px; line-height:1; margin:10px 0 12px; color:#f6e6bd; text-shadow:0 2px 0 #3a2340, 0 10px 30px rgba(0,0,0,.6); }
+  .card p { font-size:16px; line-height:1.45; opacity:.85; margin:0 0 22px; }
+  .card button { height:52px; padding:0 30px; border-radius:26px; background:var(--paper); color:var(--ink); font-weight:800; font-size:17px; }
+</style>
+  <script type="module" crossorigin src="./assets/index-CrlvjiPC.js"></script>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="wallet" class="pill"><i class="cn"></i><span id="coinN">0</span></div>
+<button id="who" class="pill">Keira</button>
+<div id="buddy" class="pill hidden"></div>
+<div id="toast"></div>
+<div id="zzz"><span>z</span><span>z</span><span>z</span></div>
+<div id="bottom"><button id="jumpBtn" class="hidden">Jump in</button><button id="shopBtn">Fix up the house</button></div>
+<div id="shop" class="sheet hidden"><button class="x" id="shopClose">✕</button><h2>Fix up the house</h2><p class="sub">Spend the pennies you bring back from other worlds.</p><div id="shopList"></div></div>
+<div id="fridgeP" class="sheet hidden"><button class="x" id="fridgeClose">✕</button><h2>The fridge</h2><p class="sub" id="fridgeNote"></p><div id="fridgeList"></div></div>
+<div id="flash"></div>
+<div id="loading">Opening the front door…</div>
+<div id="intro" class="hidden"><div class="card"><div class="kicker">Keira &amp; Mila's</div><h1>Outrageous Adventure</h1><p>This is a normal house. Mostly. Somewhere in here are hidden rooms, and the hidden rooms have doors to other worlds.</p><button id="introGo">Look around</button></div></div>
+</body>
+</html>
