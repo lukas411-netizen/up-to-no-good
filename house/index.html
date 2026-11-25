@@ -61,8 +61,18 @@
   .card h1 { font-family:'Fraunces',serif; font-weight:800; font-size:40px; line-height:1; margin:10px 0 12px; color:#f6e6bd; text-shadow:0 2px 0 #3a2340, 0 10px 30px rgba(0,0,0,.6); }
   .card p { font-size:16px; line-height:1.45; opacity:.85; margin:0 0 22px; }
   .card button { height:52px; padding:0 30px; border-radius:26px; background:var(--paper); color:var(--ink); font-weight:800; font-size:17px; }
+  #story { position:fixed; left:12px; right:12px; bottom:calc(var(--safe-bot) + 16px); z-index:9; background:rgba(18,13,24,.88); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    border:1px solid rgba(214,178,106,.4); border-radius:18px; padding:16px 18px 30px; color:var(--paper); }
+  #story.in { animation:up .35s ease-out; }
+  #storyWho { font-family:'Fraunces',serif; font-weight:800; font-size:15px; letter-spacing:.06em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+  #story[data-who=mila] #storyWho { color:#f2a3b8; } #story[data-who=keira] #storyWho { color:#c9a6ff; }
+  #story[data-who=""] #storyWho { display:none; }
+  #story[data-who=""] #storyText { font-family:'Fraunces',serif; font-style:italic; font-weight:600; }
+  #storyText { font-size:18px; line-height:1.4; }
+  #story::after { content:'tap'; position:absolute; right:16px; bottom:10px; font-size:12px; opacity:.5; letter-spacing:.15em; text-transform:uppercase; animation:blink 1.4s infinite; }
+  @keyframes blink { 50% { opacity:.15; } }
 </style>
-  <script type="module" crossorigin src="./assets/index-8tnET_8O.js"></script>
+  <script type="module" crossorigin src="./assets/index-DADgj0iU.js"></script>
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -74,6 +84,7 @@
 <div id="bottom"><button id="jumpBtn" class="hidden">Jump in</button><button id="shopBtn">Fix up the house</button></div>
 <div id="shop" class="sheet hidden"><button class="x" id="shopClose">✕</button><h2>Fix up the house</h2><p class="sub">Spend the pennies you bring back from other worlds.</p><div id="shopList"></div></div>
 <div id="fridgeP" class="sheet hidden"><button class="x" id="fridgeClose">✕</button><h2>The fridge</h2><p class="sub" id="fridgeNote"></p><div id="fridgeList"></div></div>
+<div id="story" class="hidden"><div id="storyWho"></div><div id="storyText"></div></div>
 <div id="flash"></div>
 <div id="loading">Opening the front door…</div>
 <div id="intro" class="hidden"><div class="card"><div class="kicker">Keira &amp; Mila's</div><h1>Outrageous Adventure</h1><p>This is a normal house. Mostly. Somewhere in here are hidden rooms, and the hidden rooms have doors to other worlds.</p><button id="introGo">Look around</button></div></div>
