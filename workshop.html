@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bob's Workshop</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #14161d; --panel: #1d2029; --line: #2c3040; --txt: #e9ecf5; --accent: #ff3d8b; }
+  * { box-sizing: border-box; }
+  body { margin: 0; height: 100vh; display: flex; background: var(--bg); color: var(--txt); font-family: Fredoka, system-ui, sans-serif; overflow: hidden; }
+  #stage { flex: 1; position: relative; display: grid; place-items: center; }
+  #c { width: 100%; height: 100%; display: block; }
+  body.phone #c { width: 390px; height: 844px; max-height: 100%; border-radius: 28px; box-shadow: 0 0 0 10px #000, 0 20px 60px rgba(0,0,0,.6); }
+  body.phone #stage { padding: 20px; }
+  aside { width: 300px; background: var(--panel); border-left: 1px solid var(--line); padding: 16px; overflow-y: auto; }
+  h1 { font-size: 19px; margin: 0 0 2px; }
+  .sub { font-size: 12px; opacity: .6; margin-bottom: 14px; }
+  h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.2px; opacity: .55; margin: 18px 0 8px; font-weight: 700; }
+  button { font-family: inherit; font-weight: 600; font-size: 13px; color: var(--txt); background: #2a2e3b; border: 1px solid var(--line); border-radius: 9px; padding: 7px 11px; cursor: pointer; }
+  button:hover { background: #343a4a; }
+  button.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .row { display: flex; flex-wrap: wrap; gap: 6px; }
+  #palettes { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+  .sw { padding: 0; aspect-ratio: 1; border-radius: 50%; border: 2px solid transparent; position: relative;
+    background: conic-gradient(from 200deg, var(--a) 0 55%, var(--b) 55% 80%, var(--j) 80% 100%); }
+  .sw::after { content: ''; position: absolute; inset: 36%; border-radius: 50%; background: var(--g); }
+  .sw.ten { border-color: #ffd23f; }
+  .sw.on { outline: 2px solid var(--accent); outline-offset: 2px; }
+  #pname { font-size: 13px; margin-top: 8px; opacity: .8; }
+  #info { font-size: 11px; opacity: .5; margin-top: 16px; line-height: 1.5; }
+  .note { font-size: 11px; opacity: .5; line-height: 1.5; margin-top: 6px; }
+  #loading { position: fixed; inset: 0; display: grid; place-items: center; background: var(--bg); z-index: 9; }
+</style>
+  <script type="module" crossorigin src="./assets/workshop-CGrw3HXs.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/bob-Bhz6UI8P.js">
+</head>
+<body>
+<div id="stage"><canvas id="c"></canvas></div>
+<aside>
+  <h1>Bob's Workshop</h1>
+  <div class="sub">Look at Bob, try colours, check poses.</div>
+
+  <h2>Pose</h2>
+  <div class="row">
+    <button class="pose on" id="p_idle">Idle</button>
+    <button class="pose" id="p_crouch">Crouch</button>
+    <button class="pose" id="p_boost">Boost</button>
+    <button class="pose" id="p_fall">Fall</button>
+    <button class="pose" id="p_land">Land</button>
+    <button class="pose" id="p_wave">Wave</button>
+    <button class="pose" id="p_flip">Flip</button>
+    <button class="pose" id="p_cheer">Cheer</button>
+  </div>
+
+  <h2>View</h2>
+  <div class="row">
+    <button id="turn">Turntable</button>
+    <button id="wire">Wireframe</button>
+    <button id="rockets">Rockets on/off</button>
+    <button id="phone">Phone frame</button>
+    <button id="shot">Save PNG</button>
+  </div>
+
+  <h2>Background</h2>
+  <div class="row">
+    <button id="bg_studio">Studio</button><button id="bg_sky">Sky</button><button id="bg_dark">Night</button><button id="bg_pink">Candy</button>
+  </div>
+
+  <h2>Colours — all 37</h2>
+  <div id="palettes"></div>
+  <div id="pname">emerald · emerald, gold</div>
+  <div class="note">Gold ring = one of the ten skins in the game.</div>
+
+  <div id="info"></div>
+  <div class="note">Drag to orbit, scroll to zoom, right-drag to pan.</div>
+</aside>
+<div id="loading">Loading Bob…</div>
+</body>
+</html>
