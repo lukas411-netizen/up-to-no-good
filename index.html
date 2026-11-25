@@ -194,7 +194,10 @@
   #team button i { font-style: normal; font-size: 18px; line-height: 10px; height: 10px; letter-spacing: 2px; }
   #team button.ready { opacity: .9; }
   #team button.on { opacity: 1; transform: translateY(-6px) scale(1.06); box-shadow: 0 0 22px -4px currentColor, inset 0 0 18px -8px currentColor; }
-  #team .keira { color: #c8b4ff; } #team .mila { color: #7fffe0; } #team .george { color: #ffc66b; }
+  #team .keira { color: #c8b4ff; } #team .mila { color: #7fffe0; } #team .george { color: #ffc66b; } #team .owl { color: #e8d0a8; }
+  #team #compBtn { width: 64px; border-style: dashed; margin-left: 6px; }
+  #team #compBtn i { font-size: 11px; letter-spacing: 0; font-family: 'Fredoka', sans-serif; font-weight: 700; }
+  #houseBtn { color: #7fffe0; }
   #combo { position: fixed; right: 14px; top: calc(var(--safe-top) + 64px); z-index: 6; pointer-events: none; text-align: center; }
   #combo b { display: block; font: 34px 'Lilita One', sans-serif; color: #7fffe0; text-shadow: 0 0 14px rgba(95,255,224,.7), 0 3px 0 #0c0a1e; }
   #combo span { display: block; height: 4px; border-radius: 4px; background: #7fffe0; box-shadow: 0 0 8px #7fffe0; margin: 2px auto 0; width: 100%; }
@@ -234,7 +237,7 @@
   .page.locked b { color: #8a84a0; } .pop.combo { color: #7fffe0; font-size: 30px; }
 </style>
   <script type="module" crossorigin src="./assets/bob-B6fKxMvy.js"></script>
-  <script type="module" crossorigin src="./assets/main-CY1Idq_W.js"></script>
+  <script type="module" crossorigin src="./assets/main-BpoyF3ON.js"></script>
 </head>
 <body data-edition="bday">
 <canvas id="c"></canvas>
@@ -251,10 +254,10 @@
   <button id="play" class="hidden">PLAY</button>
   <div class="pick">
     <button id="playKeira" class="big kid keira">KEIRA<small>Freeze spell</small></button>
-    <button id="playGeorge" class="big kid george">GEORGE<small>Ground pound</small></button>
     <button id="playMila" class="big kid mila">MILA<small>Double splits</small></button>
   </div>
   <div class="row">
+    <button id="houseBtn" class="pill extra hidden">HOUSE<small>Back home</small></button>
     <button id="dailyBtn" class="pill extra">DAILY TOWER<small id="dailyStreak">Same tower for everyone</small></button>
     <button id="bookBtn" class="pill extra">BOOK<small><span id="bookBtnN">0</span> / 13 found</small></button>
     <button id="skinsBtn" class="hidden">SKINS</button>
@@ -275,7 +278,7 @@
 <div id="team" class="hidden">
   <button data-i="0" class="keira" aria-label="Tag in Keira"><b>K</b>KEIRA<i>•</i></button>
   <button data-i="1" class="mila" aria-label="Tag in Mila"><b>M</b>MILA<i>••</i></button>
-  <button data-i="2" class="george" aria-label="Tag in George"><b>G</b>GEORGE<i>•</i></button>
+  <button id="compBtn" class="hidden" aria-label="Companion"></button>
 </div>
 <div id="curse" class="hidden"></div>
 <div id="combo" class="hidden"><b>x2</b><span></span></div>
@@ -297,7 +300,7 @@
     <div id="overDaily" class="overline hidden"></div>
     <div class="stack">
       <button id="again" class="big">AGAIN!</button>
-      <div class="row"><button id="home" class="pill">HOME</button><button id="overSkins" class="hidden">SKINS</button></div>
+      <div class="row"><button id="home" class="pill">HOME</button><button id="overHouse" class="pill hidden">BACK TO THE HOUSE</button><button id="overSkins" class="hidden">SKINS</button></div>
     </div>
   </div>
 </div>
