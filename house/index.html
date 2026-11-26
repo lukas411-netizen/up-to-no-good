@@ -66,6 +66,8 @@
   @keyframes z { 0% { transform:translate(0,0); opacity:0; } 20% { opacity:1; } 100% { transform:translate(18px,-40px); opacity:0; } }
   #flash { position:fixed; inset:0; background:radial-gradient(circle,#fff,#b9a3ff 40%,#2a0b4a); opacity:0; pointer-events:none; transition:opacity .4s; z-index:20; }
   #flash.on { opacity:1; }
+  #fade { position:fixed; inset:0; background:#0c0a10; opacity:0; pointer-events:none; transition:opacity .4s ease; z-index:24; }
+  #fade.on { opacity:1; }
   #loading, #intro { position:fixed; inset:0; display:grid; place-items:center; background:radial-gradient(circle at 50% 40%,#2c2140,#120d18); z-index:30; text-align:center; padding:24px; }
   #loading { font-family:'Fraunces',serif; font-size:22px; opacity:.85; }
   #intro { background:rgba(12,9,16,.55); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); }
@@ -102,7 +104,7 @@
   .heart { position:fixed; z-index:8; pointer-events:none; color:#ff6b8a; font-size:24px; animation:heart 1.4s ease-out forwards; text-shadow:0 2px 6px rgba(0,0,0,.3); }
   @keyframes heart { from { transform:translate(-50%,0) scale(.6); opacity:1; } to { transform:translate(-50%,-90px) scale(1.2); opacity:0; } }
 </style>
-  <script type="module" crossorigin src="./assets/index-D7auxpkI.js"></script>
+  <script type="module" crossorigin src="./assets/index-Bzqivj39.js"></script>
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -121,6 +123,7 @@
 <div id="mapP" class="hidden"><canvas id="mapCanvas"></canvas><button id="mapClose">Close the map</button></div>
 <div id="card" class="hidden"><button id="cardX">✕</button><div id="cardName"></div><div id="cardText"></div><div id="cardOpts"></div></div>
 <div id="flash"></div>
+<div id="fade"></div>
 <div id="loading">Opening the front door…</div>
 <div id="intro" class="hidden"><div class="card"><div class="kicker">Keira &amp; Mila's</div><h1>Outrageous Adventure</h1><p>This is a normal house. Mostly. Somewhere in here are hidden rooms, and the hidden rooms have doors to other worlds.</p><button id="introGo">Look around</button></div></div>
 </body>
