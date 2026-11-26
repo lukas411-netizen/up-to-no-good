@@ -19,6 +19,8 @@
   .pill { position:fixed; top:calc(var(--safe-top) + 12px); height:40px; padding:0 14px; border-radius:20px; display:flex; align-items:center; gap:8px;
     background:rgba(22,16,30,.72); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(214,178,106,.35); font-weight:800; font-size:17px; z-index:5; }
   #wallet { left:12px; }
+  #quest { display:block; right:12px; top:calc(var(--safe-top) + 60px); height:auto; max-width:min(58vw,300px); padding:7px 12px; font-size:13px; font-weight:600; line-height:1.3; border-radius:14px; }
+  #quest b { display:block; color:#d6b26a; font-size:11px; letter-spacing:.08em; text-transform:uppercase; }
   #wallet.pop { animation:pop .5s; }
   @keyframes pop { 40% { transform:scale(1.18); } }
   .cn { display:inline-block; width:18px; height:18px; border-radius:50%; background:radial-gradient(circle at 35% 35%,#f3b27a,#c8733a 55%,#8a4a22); box-shadow:inset 0 0 0 2px rgba(90,40,10,.35); vertical-align:-3px; margin-right:5px; }
@@ -104,10 +106,11 @@
   .heart { position:fixed; z-index:8; pointer-events:none; color:#ff6b8a; font-size:24px; animation:heart 1.4s ease-out forwards; text-shadow:0 2px 6px rgba(0,0,0,.3); }
   @keyframes heart { from { transform:translate(-50%,0) scale(.6); opacity:1; } to { transform:translate(-50%,-90px) scale(1.2); opacity:0; } }
 </style>
-  <script type="module" crossorigin src="./assets/index-Bzqivj39.js"></script>
+  <script type="module" crossorigin src="./assets/index-D8FiMwbn.js"></script>
 </head>
 <body>
 <canvas id="c"></canvas>
+<div id="quest" class="pill hidden"></div>
 <div id="wallet" class="pill"><i class="cn"></i><span id="coinN">0</span></div>
 <button id="who" class="pill">Keira</button>
 <div id="buddy" class="pill hidden"></div>
