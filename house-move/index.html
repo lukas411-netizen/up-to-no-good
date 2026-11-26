@@ -181,6 +181,8 @@
   .stamp { font:800 11px 'Nunito',sans-serif; letter-spacing:.1em; text-transform:uppercase; color:var(--teal); border:2.5px solid var(--teal); border-radius:6px; padding:4px 7px; transform:rotate(-7deg); white-space:nowrap; animation:stamp .3s cubic-bezier(.3,1.6,.5,1); }
   @keyframes stamp { from { transform:rotate(-7deg) scale(2.2); opacity:0; } }
   .row.fabric { flex-wrap:wrap; }
+  .row.outfit .dots { display:flex; flex:none; width:58px; } .row.outfit .dots i { width:26px; height:26px; margin-right:-9px; border-radius:50%; border:2px solid var(--ink); background:var(--paper2); }
+  .row.outfit.locked { opacity:.62; } .row.outfit.locked .dots i { border-style:dashed; }
   .swatches { display:flex; flex-wrap:wrap; gap:10px; width:100%; padding:2px 0 2px 70px; }
   .swatches button { width:42px; height:42px; border-radius:50%; border:2.5px solid rgba(27,20,36,.25); box-shadow:inset 0 -6px 10px rgba(0,0,0,.18); }
   .swatches button.on { border-color:var(--ink); box-shadow:inset 0 -6px 10px rgba(0,0,0,.18), 0 3px 0 var(--ink); transform:translateY(-2px); }
@@ -235,7 +237,7 @@
   @keyframes heart { from { transform:translate(-50%,0) scale(.6); opacity:1; } to { transform:translate(-50%,-90px) scale(1.2); opacity:0; } }
   @media (prefers-reduced-motion: reduce) { .bubIn, .sheet, #card, .stamp, .shout .ch.on { animation:none !important; } }
 </style>
-  <script type="module" crossorigin src="./assets/index-DYsZecvc.js"></script>
+  <script type="module" crossorigin src="./assets/index-Djru_1OY.js"></script>
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -254,6 +256,7 @@
 <div id="bottom"><button id="jumpBtn" class="hidden">Jump in</button><button id="actBtn" class="hidden"></button><button id="bagBtn"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1424" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0v9a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2z" fill="#b48ad6"/><path d="M9 4.5a3 3 0 0 1 6 0"/><rect x="9" y="12" width="6" height="4" rx="1" fill="#f4ecdc"/></svg>Bag<span class="key keysOnly">B</span></button><button id="shopBtn"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1424" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z" fill="#d6b26a"/><rect x="10" y="14" width="4" height="6" fill="#7a2e3a"/></svg>Fix up the house</button></div>
 <div id="journalP" class="sheet hidden"><header><i class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#f4ecdc" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h11a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6z" fill="#f4ecdc" stroke="#1b1424"/><path d="M6 3v18M9.5 8h5M9.5 12h5" stroke="#1b1424"/></svg></i><div><h2>Keira's notebook</h2><p class="sub">With notes in the margin by Mila, who was not asked.</p></div><button class="x" id="journalClose" aria-label="Close">✕</button></header><div class="jtabs"></div><div class="jpage"></div></div>
 <div id="bagP" class="sheet hidden"><div id="bagWho"><button data-w="keira">Keira</button><button data-w="mila">Mila</button></div><header><i class="face"></i><div><h2 id="bagTitle">Keira's bag</h2><p class="sub" id="bagSub">Things you've picked up around the house.</p></div><button class="x" id="bagClose" aria-label="Close">✕</button></header><div id="bagGrid"></div><div id="bagInfo"></div></div>
+<div id="wardP" class="sheet hidden"><header><i class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1424" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7a2 2 0 1 0-2-2" /><path d="M12 7v2l8 6a1 1 0 0 1-.6 1.8H4.600a1 1 0 0 1-.6-1.8L12 9" fill="#f4ecdc"/></svg></i><div><h2 id="wardTitle">Clothes</h2><p class="sub">Earned around the house and in the worlds. Worn anywhere.</p></div><button class="x" id="wardClose" aria-label="Close">✕</button></header><div id="wardList"></div></div>
 <div id="shop" class="sheet hidden"><header><i class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1424" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z" fill="#f4ecdc"/><rect x="10" y="14" width="4" height="6" fill="#7a2e3a"/></svg></i><div><h2>Fix up the house</h2><p class="sub">Spend the pennies you bring back from other worlds.</p></div><button class="x" id="shopClose" aria-label="Close">✕</button></header><div id="shopList"></div></div>
 <div id="fridgeP" class="sheet hidden"><header><i class="glyph" style="background-color:#a9d3cf"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1424" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"><rect x="6" y="3" width="12" height="18" rx="2" fill="#f4ecdc"/><path d="M6 10h12M9 6v2M9 13v3"/></svg></i><div><h2>The fridge</h2><p class="sub" id="fridgeNote"></p></div><button class="x" id="fridgeClose" aria-label="Close">✕</button></header><div id="fridgeList"></div><div id="fridgeCold"></div></div>
 <div id="story" class="hidden"></div>
