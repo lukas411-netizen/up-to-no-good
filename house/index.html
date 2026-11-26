@@ -54,6 +54,29 @@
   #quest li.done { opacity:.6; text-decoration:line-through; text-decoration-thickness:2px; }
   #quest li.done i::after { content:''; position:absolute; left:2px; top:-6px; width:7px; height:13px; border:solid var(--keira); border-width:0 3px 3px 0; transform:rotate(40deg); }
   #quest li.new { animation:up .3s ease-out; }
+  #quest .jBtn { display:block; width:calc(100% - 16px); height:30px; margin:4px 8px 8px; border-radius:8px; border:2px solid var(--ink); background:var(--paper); box-shadow:0 2px 0 var(--ink); font:800 12.5px 'Nunito',sans-serif; color:var(--ink); }
+  #quest.shut .jBtn { display:none; }
+  /* ----- Keira's notebook: lined pages, her handwriting, Mila's mustard scribbles in the margin ----- */
+  #journalP { background:#fbf6e6; }
+  #journalP .glyph { background-color:var(--keira); }
+  .jtabs { display:flex; gap:6px; margin:0 0 -2px; padding:0 2px; }
+  .jtabs button { flex:1; height:36px; white-space:nowrap; border:var(--edge); border-bottom:0; border-radius:10px 10px 0 0; background:var(--paper2); font:800 13px 'Nunito',sans-serif; color:var(--ink); opacity:.75; display:flex; align-items:center; justify-content:center; gap:6px; }
+  .jtabs button.on { background:#fffbe8; opacity:1; height:40px; margin-top:-4px; }
+  .jtabs button span { min-width:20px; height:20px; padding:0 5px; border-radius:10px; background:var(--keira); color:var(--paper); font-size:11.5px; display:grid; place-items:center; }
+  .jpage { border:var(--edge); border-radius:0 0 12px 12px; background:#fffbe8; background-image:linear-gradient(90deg, transparent 33px, rgba(200,70,70,.35) 33px 35px, transparent 35px), repeating-linear-gradient(transparent 0 27px, rgba(60,90,160,.2) 27px 28px); padding:10px 12px 14px 44px; max-height:min(52vh, 430px); overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; font:600 20px/28px 'Caveat','Bradley Hand',cursive; color:#2a2238; }
+  .jpage ul, .jpage ol { list-style:none; margin:0; padding:0; }
+  .jpage li { position:relative; display:flex; gap:10px; align-items:flex-start; padding:0 0 12px; }
+  .jpage li > div { flex:1; min-width:0; } .jpage b { display:block; font-weight:700; font-size:22px; line-height:28px; } .jpage li span { display:block; opacity:.82; }
+  .jq li > i { flex:none; width:17px; height:17px; margin:6px 0 0 -34px; border:2px solid var(--ink); border-radius:3px; background:rgba(255,255,255,.6); position:relative; }
+  .jq li.done b { text-decoration:line-through; text-decoration-thickness:2px; opacity:.6; } .jq li.done span { opacity:.6; }
+  .jq li.done > i::after { content:''; position:absolute; left:3px; top:-7px; width:8px; height:15px; border:solid var(--keira); border-width:0 3px 3px 0; transform:rotate(40deg); }
+  .jq li > i + div { margin-left:7px; }
+  .jp .pf { flex:none; width:52px; height:52px; margin-left:-36px; border-radius:50%; border:var(--edge); background:var(--paper2) center/cover; display:grid; place-items:center; font:800 24px 'Fraunces',serif; font-style:normal; color:rgba(27,20,36,.45); }
+  .jp li.unk .pf { border-style:dashed; } .jp li.unk b { opacity:.55; }
+  .jc { counter-reset:c; } .jc li { counter-increment:c; display:block; } .jc li::before { content:counter(c) '.'; position:absolute; left:-30px; font-weight:700; color:var(--keira); }
+  .jhead { margin:0; font:700 26px/28px 'Caveat',cursive; text-decoration:underline; text-decoration-color:var(--keira); text-underline-offset:4px; } .jcount, .jmore, .jnone { margin:0 0 12px; opacity:.6; font-size:18px; } .jmore { margin:4px 0 0; }
+  .jpage em.mila { display:inline-block; margin:2px 0 0 8px; padding:0 6px; font:700 18px/24px 'Caveat',cursive; font-style:normal; color:#b06a00; background:rgba(234,166,60,.22); border-radius:4px; }
+  @media (hover:hover) and (pointer:fine) and (min-width:760px) { #journalP { width:480px; } .jpage { max-height:min(60vh, 520px); } }
   #quest .moreBtn { display:block; width:100%; height:30px; background:none; font:800 12px 'Nunito',sans-serif; color:#5b2a6b; text-align:left; padding:0 12px; }
   @media (hover:hover) and (pointer:fine) and (min-width:760px) { #quest { width:250px; } }
 
@@ -203,7 +226,7 @@
   @keyframes heart { from { transform:translate(-50%,0) scale(.6); opacity:1; } to { transform:translate(-50%,-90px) scale(1.2); opacity:0; } }
   @media (prefers-reduced-motion: reduce) { .bubIn, .sheet, #card, .stamp, .shout .ch.on { animation:none !important; } }
 </style>
-  <script type="module" crossorigin src="./assets/index-DLfxDcpU.js"></script>
+  <script type="module" crossorigin src="./assets/index-BCOueSsj.js"></script>
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -220,6 +243,7 @@
 <div class="help touchOnly"><span class="k"><i class="cap">Drag</i></span><span>Anywhere, to move. Push gently to stroll.</span><span class="k"><i class="cap">Tap</i></span><span>A thing, to look at it</span><span class="k"><i class="cap g">Double tap</i></span><span>A thing, to use it</span><span class="k"><i class="cap">Tap floor</i></span><span>Walk there</span><span class="k"><i class="cap">Pinch</i></span><span>Zoom in and out</span><span class="k"><i class="cap">Twist</i></span><span>Two fingers, to turn the room</span></div></div>
 <div id="stick" class="hidden"><div id="knob"></div></div>
 <div id="bottom"><button id="jumpBtn" class="hidden">Jump in</button><button id="actBtn" class="hidden"></button><button id="bagBtn"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1424" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0v9a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2z" fill="#b48ad6"/><path d="M9 4.5a3 3 0 0 1 6 0"/><rect x="9" y="12" width="6" height="4" rx="1" fill="#f4ecdc"/></svg>Bag<span class="key keysOnly">B</span></button><button id="shopBtn"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1424" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z" fill="#d6b26a"/><rect x="10" y="14" width="4" height="6" fill="#7a2e3a"/></svg>Fix up the house</button></div>
+<div id="journalP" class="sheet hidden"><header><i class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#f4ecdc" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h11a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6z" fill="#f4ecdc" stroke="#1b1424"/><path d="M6 3v18M9.5 8h5M9.5 12h5" stroke="#1b1424"/></svg></i><div><h2>Keira's notebook</h2><p class="sub">With notes in the margin by Mila, who was not asked.</p></div><button class="x" id="journalClose" aria-label="Close">✕</button></header><div class="jtabs"></div><div class="jpage"></div></div>
 <div id="bagP" class="sheet hidden"><div id="bagWho"><button data-w="keira">Keira</button><button data-w="mila">Mila</button></div><header><i class="face"></i><div><h2 id="bagTitle">Keira's bag</h2><p class="sub" id="bagSub">Things you've picked up around the house.</p></div><button class="x" id="bagClose" aria-label="Close">✕</button></header><div id="bagGrid"></div><div id="bagInfo"></div></div>
 <div id="shop" class="sheet hidden"><header><i class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1424" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z" fill="#f4ecdc"/><rect x="10" y="14" width="4" height="6" fill="#7a2e3a"/></svg></i><div><h2>Fix up the house</h2><p class="sub">Spend the pennies you bring back from other worlds.</p></div><button class="x" id="shopClose" aria-label="Close">✕</button></header><div id="shopList"></div></div>
 <div id="fridgeP" class="sheet hidden"><header><i class="glyph" style="background-color:#a9d3cf"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1424" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"><rect x="6" y="3" width="12" height="18" rx="2" fill="#f4ecdc"/><path d="M6 10h12M9 6v2M9 13v3"/></svg></i><div><h2>The fridge</h2><p class="sub" id="fridgeNote"></p></div><button class="x" id="fridgeClose" aria-label="Close">✕</button></header><div id="fridgeList"></div></div>
