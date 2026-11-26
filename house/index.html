@@ -96,6 +96,13 @@
   #mapClose { height:48px; padding:0 26px; border-radius:24px; background:var(--paper); color:var(--ink); font-weight:800; font-size:16px; }
   #stick { position:fixed; left:-60px; top:-60px; width:120px; height:120px; border-radius:50%; pointer-events:none; z-index:7;
     background:radial-gradient(circle, rgba(244,236,220,.10), rgba(244,236,220,.22)); border:2px solid rgba(244,236,220,.45); box-shadow:0 0 24px rgba(0,0,0,.25); }
+  #near { position:fixed; left:0; top:0; width:0; height:0; pointer-events:none; z-index:4; }
+  #near i { position:absolute; left:-9px; top:-9px; width:18px; height:18px; border-radius:50%; border:2px solid rgba(255,244,214,.95); background:rgba(246,214,140,.35); box-shadow:0 0 16px 4px rgba(230,190,110,.75); animation:nearPulse 1.4s ease-in-out infinite; }
+  @keyframes nearPulse { 0%,100% { transform:scale(.8); opacity:.55; } 50% { transform:scale(1.25); opacity:1; } }
+  #helpBtn { position:fixed; left:14px; top:calc(env(safe-area-inset-top, 0px) + 62px); z-index:5; width:40px; height:40px; border-radius:50%; border:0; font:700 18px system-ui; color:var(--ink); background:rgba(244,236,220,.9); box-shadow:0 4px 14px rgba(0,0,0,.3); }
+  .help p { margin:10px 0; line-height:1.35; }
+  @media (hover:hover) and (pointer:fine) { .touchOnly { display:none; } }
+  @media not ((hover:hover) and (pointer:fine)) { .keysOnly { display:none; } }
   #stick.run { border-color:rgba(214,178,106,.95); box-shadow:0 0 22px rgba(214,178,106,.45); }
   #knob { position:absolute; left:34px; top:34px; width:52px; height:52px; border-radius:50%; background:rgba(244,236,220,.85); box-shadow:0 4px 14px rgba(0,0,0,.35); }
   #bottom #actBtn { background:linear-gradient(180deg,#f6e6bd,#d6b26a); color:var(--ink); animation:pop .3s; white-space:nowrap; max-width:calc(100vw - 130px); overflow:hidden; text-overflow:ellipsis; }
@@ -110,7 +117,7 @@
   .heart { position:fixed; z-index:8; pointer-events:none; color:#ff6b8a; font-size:24px; animation:heart 1.4s ease-out forwards; text-shadow:0 2px 6px rgba(0,0,0,.3); }
   @keyframes heart { from { transform:translate(-50%,0) scale(.6); opacity:1; } to { transform:translate(-50%,-90px) scale(1.2); opacity:0; } }
 </style>
-  <script type="module" crossorigin src="./assets/index-Cykkx3B5.js"></script>
+  <script type="module" crossorigin src="./assets/index-DGmRdwdl.js"></script>
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -120,6 +127,11 @@
 <div id="buddy" class="pill hidden"></div>
 <div id="toast"></div>
 <div id="zzz"><span>z</span><span>z</span><span>z</span></div>
+<div id="near" class="hidden"><i></i></div>
+<button id="helpBtn" aria-label="Controls">?</button>
+<div id="helpP" class="sheet hidden"><button class="x" id="helpClose">✕</button><h2>How to get around</h2>
+<div class="help keysOnly"><p><b>Arrow keys</b> or <b>WASD</b> to move</p><p>Hold <b>Shift</b> to stroll</p><p><b>E</b> or <b>Space</b> to use what is in front of you</p><p><b>Click</b> a thing to look at it, <b>double click</b> to use it</p><p><b>Click the floor</b> to walk there</p><p><b>Q</b> swaps sisters, <b>B</b> opens the bag</p><p><b>Mouse wheel</b> zooms</p></div>
+<div class="help touchOnly"><p><b>Drag anywhere</b> to move. Push gently to stroll.</p><p><b>Tap</b> a thing to look at it</p><p><b>Double tap</b> a thing to use it</p><p><b>Tap the floor</b> to walk there</p><p><b>Pinch</b> to zoom, <b>twist</b> two fingers to turn the room</p></div></div>
 <div id="stick" class="hidden"><div id="knob"></div></div>
 <div id="bottom"><button id="jumpBtn" class="hidden">Jump in</button><button id="actBtn" class="hidden"></button><button id="bagBtn">Bag</button><button id="shopBtn">Fix up the house</button></div>
 <div id="bagP" class="sheet hidden"><button class="x" id="bagClose">✕</button><h2 id="bagTitle">Keira's bag</h2><p class="sub" id="bagSub">Things you've picked up around the house.</p><div id="bagGrid"></div><div id="bagInfo"></div></div>
