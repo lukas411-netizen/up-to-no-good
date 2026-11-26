@@ -159,6 +159,13 @@
   .ico.big { width:60px; height:60px; margin:0; flex:none; }
   .slotIco { width:80%; height:80%; margin:0; filter:drop-shadow(0 3px 2px rgba(0,0,0,.28)); }
   .flyIcon { position:fixed; z-index:40; font-size:28px; pointer-events:none; transition:transform .7s cubic-bezier(.5,-0.2,.7,1), opacity .7s; }
+  #fridgeP { max-height:calc(100vh - 90px); overflow-y:auto; overscroll-behavior:contain; }
+  .coldHead { display:flex; align-items:baseline; gap:8px; margin:14px 2px 6px; } .coldHead b { font:800 11px 'Nunito',sans-serif; letter-spacing:.12em; text-transform:uppercase; color:var(--keira); } .coldHead span { font-size:13px; font-weight:600; opacity:.7; }
+  .coldGrid { display:grid; grid-template-columns:repeat(8, 1fr); gap:6px; } .coldGrid.in { padding:8px; border-radius:14px; background:#cfe6e2; border:2px solid rgba(27,20,36,.16); }
+  .coldGrid .slot { position:relative; aspect-ratio:1; border-radius:10px; background:rgba(255,255,255,.6); box-shadow:inset 0 2px 4px rgba(20,60,60,.18); display:flex; align-items:center; justify-content:center; padding:0; min-width:0; }
+  .coldGrid.out .slot { background:var(--paper2); outline:1.5px dashed rgba(60,40,10,.28); outline-offset:-4px; }
+  .coldGrid .slot .ico { width:82%; height:82%; } .coldGrid .slot b { position:absolute; right:1px; bottom:1px; min-width:16px; height:16px; padding:0 3px; border-radius:8px; background:var(--ink); color:var(--paper); font:800 10.5px 'Nunito',sans-serif; display:grid; place-items:center; }
+  @media (max-width:759px) { .coldGrid { grid-template-columns:repeat(4, 1fr); } .coldGrid.in { grid-template-columns:repeat(8, 1fr); } }
   .row { display:flex; width:100%; align-items:center; gap:12px; text-align:left; padding:10px; margin:8px 0 0; border-radius:14px; background:#fffaf0; color:var(--ink); font-size:16px; border:2px solid rgba(27,20,36,.16); }
   .row .th { width:58px; height:58px; border-radius:10px; border:2px solid var(--ink); background:#e9dcc0 center/contain no-repeat; flex:none; }
   .row .tx { flex:1; min-width:0; }
@@ -226,7 +233,7 @@
   @keyframes heart { from { transform:translate(-50%,0) scale(.6); opacity:1; } to { transform:translate(-50%,-90px) scale(1.2); opacity:0; } }
   @media (prefers-reduced-motion: reduce) { .bubIn, .sheet, #card, .stamp, .shout .ch.on { animation:none !important; } }
 </style>
-  <script type="module" crossorigin src="./assets/index-BCOueSsj.js"></script>
+  <script type="module" crossorigin src="./assets/index-D2ugCdkK.js"></script>
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -246,7 +253,7 @@
 <div id="journalP" class="sheet hidden"><header><i class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#f4ecdc" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h11a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6z" fill="#f4ecdc" stroke="#1b1424"/><path d="M6 3v18M9.5 8h5M9.5 12h5" stroke="#1b1424"/></svg></i><div><h2>Keira's notebook</h2><p class="sub">With notes in the margin by Mila, who was not asked.</p></div><button class="x" id="journalClose" aria-label="Close">✕</button></header><div class="jtabs"></div><div class="jpage"></div></div>
 <div id="bagP" class="sheet hidden"><div id="bagWho"><button data-w="keira">Keira</button><button data-w="mila">Mila</button></div><header><i class="face"></i><div><h2 id="bagTitle">Keira's bag</h2><p class="sub" id="bagSub">Things you've picked up around the house.</p></div><button class="x" id="bagClose" aria-label="Close">✕</button></header><div id="bagGrid"></div><div id="bagInfo"></div></div>
 <div id="shop" class="sheet hidden"><header><i class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1424" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z" fill="#f4ecdc"/><rect x="10" y="14" width="4" height="6" fill="#7a2e3a"/></svg></i><div><h2>Fix up the house</h2><p class="sub">Spend the pennies you bring back from other worlds.</p></div><button class="x" id="shopClose" aria-label="Close">✕</button></header><div id="shopList"></div></div>
-<div id="fridgeP" class="sheet hidden"><header><i class="glyph" style="background-color:#a9d3cf"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1424" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"><rect x="6" y="3" width="12" height="18" rx="2" fill="#f4ecdc"/><path d="M6 10h12M9 6v2M9 13v3"/></svg></i><div><h2>The fridge</h2><p class="sub" id="fridgeNote"></p></div><button class="x" id="fridgeClose" aria-label="Close">✕</button></header><div id="fridgeList"></div></div>
+<div id="fridgeP" class="sheet hidden"><header><i class="glyph" style="background-color:#a9d3cf"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1424" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"><rect x="6" y="3" width="12" height="18" rx="2" fill="#f4ecdc"/><path d="M6 10h12M9 6v2M9 13v3"/></svg></i><div><h2>The fridge</h2><p class="sub" id="fridgeNote"></p></div><button class="x" id="fridgeClose" aria-label="Close">✕</button></header><div id="fridgeList"></div><div id="fridgeCold"></div></div>
 <div id="story" class="hidden"></div>
 <div id="mapP" class="hidden"><canvas id="mapCanvas"></canvas><button id="mapClose">Close the map</button></div>
 <div id="card" class="hidden"><i class="ptr"></i><button id="cardX" aria-label="Close">✕</button><div id="cardName"></div><div id="cardText"></div><div id="cardOpts"></div></div>
