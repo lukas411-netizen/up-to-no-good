@@ -236,13 +236,39 @@
   .page.rare b { color: #ffc66b; }
   .page.locked img { filter: brightness(0) drop-shadow(0 0 6px rgba(127,214,196,.35)); opacity: .7; }
   .page.locked b { color: #8a84a0; } .pop.combo { color: #7fffe0; font-size: 30px; }
+
+  /* ---------- polish pass: keep the play area clear ---------- */
+  #team { left: 0; right: 0; transform: none; justify-content: space-between; padding: 0 10px; gap: 0; pointer-events: none; bottom: calc(var(--safe-bot) + 10px); }
+  #team button { width: 60px; height: 56px; border-radius: 18px; font-size: 12px; pointer-events: auto; }
+  #team button b { font-size: 22px; }
+  #team .mila { order: 3; }
+  #team #compBtn { order: 2; margin-left: auto; margin-right: 8px; width: 56px; }
+  #team button.tagme { opacity: 1; animation: pulse .7s infinite; box-shadow: 0 0 22px -2px currentColor; }
+  #boostPip, #boostPip.ready, #boostPip.tagme { display: none; top: calc(var(--safe-top) + 96px); bottom: auto; font-size: 13px; padding: 4px 12px; animation: none; }
+  #boostPip.fx { display: block; opacity: 1; background: rgba(14,12,34,.7); color: #ffc66b; border: 1.5px solid #ffc66b; box-shadow: 0 0 14px -3px #ffb04a; }
+  #hint { bottom: calc(var(--safe-bot) + 22px); left: 78px; right: 78px; font: 600 13px/1.35 'Fredoka', sans-serif; opacity: .8; animation: none; }
+  #toast { top: calc(var(--safe-top) + 62px); font-size: 13px; padding: 6px 14px; border-radius: 99px; }
+  #curse { top: calc(var(--safe-top) + 126px); }
+  #resume { background: rgba(14,12,34,.6) !important; color: #7fffe0 !important; border: 2px solid #7fffe0; -webkit-text-stroke: 0 !important;
+    text-shadow: 0 0 14px rgba(95,255,224,.7) !important; box-shadow: 0 0 22px -4px #7fffe0, inset 0 0 18px -8px #7fffe0 !important; }
+  #book .top h3 { font-size: 18px; white-space: nowrap; }
+  .pop.zone { color: #f3ead8; font: 22px 'Lilita One', sans-serif; letter-spacing: 3px; -webkit-text-stroke: 0; text-shadow: 0 0 18px rgba(255,220,170,.55), 0 2px 0 #0c0a1e; animation-duration: 2.6s; white-space: nowrap; }
+  #vig { position: fixed; inset: 0; pointer-events: none; z-index: 1; background: radial-gradient(ellipse 85% 70% at 50% 42%, transparent 55%, rgba(6,3,10,.55) 100%), linear-gradient(180deg, rgba(255,214,160,.07), transparent 30%, rgba(4,2,8,.3) 100%); }
+  .nut { background: radial-gradient(circle at 36% 30%, #f6c59c, #c8763f 50%, #8a4520); box-shadow: inset 0 0 0 .07em #e9a878, inset 0 0 0 .12em #7a3c1a; }
+  /* wide screens (desktop, tablets): the game is a tall window in the middle, not a thin strip in a void */
+  @media (min-aspect-ratio: 56/100) {
+    html { background: #0b0710 radial-gradient(ellipse at 50% 40%, #24141f, #0b0710 75%); }
+    body { width: calc(100vh * 0.54); margin: 0 auto; position: relative; transform: translateX(0); background: #1e1220;
+      box-shadow: 0 0 0 1px rgba(255,220,190,.14), 0 0 90px 20px rgba(0,0,0,.7); }
+  }
 </style>
-  <script type="module" crossorigin src="./assets/bob-lynSKq7E.js"></script>
-  <script type="module" crossorigin src="./assets/main-WU6YK9Jk.js"></script>
+  <script type="module" crossorigin src="./assets/bob-CmufTqKX.js"></script>
+  <script type="module" crossorigin src="./assets/main-DrBLl01d.js"></script>
 </head>
 <body data-edition="bday">
 <canvas id="c"></canvas>
-<div id="loading">Loading Bob…</div>
+<div id="vig"></div>
+<div id="loading">Loading…</div>
 
 <div id="title">
   <h1 class="logo" aria-label="Up to No Good!">
