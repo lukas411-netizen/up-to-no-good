@@ -157,7 +157,7 @@
   .kid.mila { background: linear-gradient(180deg, #ffc2e4 0%, #ff6fb5 45%, #e0287f 100%); box-shadow: inset 0 4px 0 rgba(255,255,255,.6), 0 8px 0 #9a0f4f, 0 14px 24px rgba(60,0,80,.35); -webkit-text-stroke: 2px #6b0a33; text-shadow: 0 3px 0 #6b0a33; animation-delay: .6s; }
 
   /* ===== Up to No Good: weird & mysterious skin over the shared styles ===== */
-  html, body { background: #141a3a; }
+  html, body { background: #1e1220; }
   .logo { transform: none; }
   .logo .l { animation: drift 4.5s ease-in-out infinite; color: transparent;
     background: linear-gradient(180deg, #f4efe2 0%, #cfe9df 45%, #7fd6c4 70%, #4a6fa8 100%); -webkit-background-clip: text; background-clip: text;
@@ -208,6 +208,7 @@
   body.stare::after { opacity: 1; animation: pulse 1.6s infinite; }
   .pop.eye { color: #ff8a96; font-size: 30px; text-shadow: 0 0 16px rgba(255,60,80,.8), 0 3px 0 #0c0a1e; }
   .pop.eyehint { color: #fff; font: 700 18px 'Fredoka', sans-serif; -webkit-text-stroke: 0; text-shadow: 0 2px 6px #000; animation-duration: 2.2s; }
+  .pop.find { color: #ffe0a0; font-size: 22px; text-shadow: 0 0 14px rgba(255,200,120,.7), 0 3px 0 #0c0a1e; animation-duration: 1.8s; }
   .pop.tag { color: #fff; font-size: 24px; }
   .stat { background: rgba(200,180,255,.08) !important; border: 1px solid rgba(200,180,255,.18); }
   .stat span { color: #e8e4f4; }
@@ -236,8 +237,8 @@
   .page.locked img { filter: brightness(0) drop-shadow(0 0 6px rgba(127,214,196,.35)); opacity: .7; }
   .page.locked b { color: #8a84a0; } .pop.combo { color: #7fffe0; font-size: 30px; }
 </style>
-  <script type="module" crossorigin src="./assets/bob-B6fKxMvy.js"></script>
-  <script type="module" crossorigin src="./assets/main-BpoyF3ON.js"></script>
+  <script type="module" crossorigin src="./assets/bob-lynSKq7E.js"></script>
+  <script type="module" crossorigin src="./assets/main-9hHuX09o.js"></script>
 </head>
 <body data-edition="bday">
 <canvas id="c"></canvas>
@@ -259,7 +260,7 @@
   <div class="row">
     <button id="houseBtn" class="pill extra hidden">HOUSE<small>Back home</small></button>
     <button id="dailyBtn" class="pill extra">DAILY TOWER<small id="dailyStreak">Same tower for everyone</small></button>
-    <button id="bookBtn" class="pill extra">BOOK<small><span id="bookBtnN">0</span> / 13 found</small></button>
+    <button id="bookBtn" class="pill extra">BOOK<small><span id="bookBtnN">0</span> / <span id="bookBtnT">21</span> found</small></button>
     <button id="skinsBtn" class="hidden">SKINS</button>
     <button id="soundBtn" class="pill round" aria-label="Sound">
       <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h4l5-4v14l-5-4H4z" fill="white"/><path class="wave" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/><path class="x" d="M17 9l5 6M22 9l-5 6"/></svg>
@@ -296,6 +297,7 @@
       <div class="stat"><b id="overBest">0</b><span>BEST</span></div>
       <div class="stat"><b id="overBolts">0</b><span>PENNIES</span></div>
     </div>
+    <div id="overFinds" class="overline hidden"></div>
     <div id="overCombo" class="overline hidden"></div>
     <div id="overDaily" class="overline hidden"></div>
     <div class="stack">
