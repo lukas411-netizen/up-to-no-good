@@ -117,7 +117,7 @@
   .heart { position:fixed; z-index:8; pointer-events:none; color:#ff6b8a; font-size:24px; animation:heart 1.4s ease-out forwards; text-shadow:0 2px 6px rgba(0,0,0,.3); }
   @keyframes heart { from { transform:translate(-50%,0) scale(.6); opacity:1; } to { transform:translate(-50%,-90px) scale(1.2); opacity:0; } }
 </style>
-  <script type="module" crossorigin src="./assets/index-DK9qf3eE.js"></script>
+  <script type="module" crossorigin src="./assets/index-DGmRdwdl.js"></script>
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -132,8 +132,6 @@
 <div id="helpP" class="sheet hidden"><button class="x" id="helpClose">✕</button><h2>How to get around</h2>
 <div class="help keysOnly"><p><b>Arrow keys</b> or <b>WASD</b> to move</p><p>Hold <b>Shift</b> to stroll</p><p><b>E</b> or <b>Space</b> to use what is in front of you</p><p><b>Click</b> a thing to look at it, <b>double click</b> to use it</p><p><b>Click the floor</b> to walk there</p><p><b>Q</b> swaps sisters, <b>B</b> opens the bag</p><p><b>Mouse wheel</b> zooms</p></div>
 <div class="help touchOnly"><p><b>Drag anywhere</b> to move. Push gently to stroll.</p><p><b>Tap</b> a thing to look at it</p><p><b>Double tap</b> a thing to use it</p><p><b>Tap the floor</b> to walk there</p><p><b>Pinch</b> to zoom, <b>twist</b> two fingers to turn the room</p></div></div>
-<button id="testTag" onclick="this.lastChild.textContent = window.__view() ? 'straight on' : 'angled'" style="position:fixed;left:50%;top:10px;transform:translateX(-50%);z-index:9;font:600 11px system-ui;letter-spacing:.06em;text-transform:uppercase;color:#f4ecdc;background:rgba(20,14,24,.7);padding:7px 12px;border-radius:999px;border:1px solid rgba(244,236,220,.4);white-space:nowrap">Movement test · tap to switch view: <span>angled</span></button>
-<script>addEventListener("load",function(){try{if(localStorage.getItem("kmhouse.view")==="straight")document.querySelector("#testTag span").textContent="straight on"}catch(e){}})</script>
 <div id="stick" class="hidden"><div id="knob"></div></div>
 <div id="bottom"><button id="jumpBtn" class="hidden">Jump in</button><button id="actBtn" class="hidden"></button><button id="bagBtn">Bag</button><button id="shopBtn">Fix up the house</button></div>
 <div id="bagP" class="sheet hidden"><button class="x" id="bagClose">✕</button><h2 id="bagTitle">Keira's bag</h2><p class="sub" id="bagSub">Things you've picked up around the house.</p><div id="bagGrid"></div><div id="bagInfo"></div></div>
