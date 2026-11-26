@@ -34,6 +34,19 @@
   #bottom { position:fixed; left:0; right:0; bottom:calc(var(--safe-bot) + 18px); display:flex; justify-content:center; gap:12px; z-index:5; pointer-events:none; }
   #bottom button { pointer-events:auto; height:52px; padding:0 22px; border-radius:26px; font-weight:800; font-size:17px; box-shadow:0 8px 24px rgba(0,0,0,.35); }
   #shopBtn { background:var(--paper); color:var(--ink); }
+  #bagBtn { background:var(--paper); color:var(--ink); }
+  #bagBtn.bump { animation:bump .35s ease-out; }
+  @keyframes bump { 40% { transform:scale(1.18); } }
+  #bagGrid { display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; }
+  #bagGrid .slot { position:relative; aspect-ratio:1; border-radius:14px; background:rgba(60,40,20,.08); box-shadow:inset 0 2px 4px rgba(0,0,0,.12); display:flex; align-items:center; justify-content:center; font-size:30px; padding:0; color:inherit; }
+  #bagGrid .slot.sel { background:rgba(214,170,80,.35); box-shadow:inset 0 0 0 2px #c99a3e; }
+  #bagGrid .slot b { position:absolute; right:6px; bottom:4px; font-size:13px; font-family:'Nunito',sans-serif; opacity:.75; }
+  #bagInfo { min-height:92px; margin-top:12px; }
+  #bagInfo h3 { margin:0 0 2px; font-family:'Fraunces',serif; font-size:18px; }
+  #bagInfo p { margin:0 0 10px; font-size:15px; line-height:1.35; }
+  #bagInfo .opts { display:flex; flex-wrap:wrap; gap:8px; }
+  #bagInfo .opts button { height:40px; padding:0 16px; border-radius:20px; font-weight:800; font-size:15px; background:linear-gradient(#f3d98a,#d9b25a); color:#3a2a10; }
+  .flyIcon { position:fixed; z-index:40; font-size:28px; pointer-events:none; transition:transform .7s cubic-bezier(.5,-0.2,.7,1), opacity .7s; }
   #jumpBtn { background:linear-gradient(135deg,#7a3cff,#2fd4ff); color:#fff; animation:glow 1.6s infinite; }
   @keyframes glow { 50% { box-shadow:0 0 30px rgba(122,60,255,.8); } }
   .sheet { position:fixed; left:0; right:0; bottom:0; padding:18px 16px calc(var(--safe-bot) + 18px); background:var(--paper); color:var(--ink); border-radius:22px 22px 0 0;
@@ -89,7 +102,7 @@
   .heart { position:fixed; z-index:8; pointer-events:none; color:#ff6b8a; font-size:24px; animation:heart 1.4s ease-out forwards; text-shadow:0 2px 6px rgba(0,0,0,.3); }
   @keyframes heart { from { transform:translate(-50%,0) scale(.6); opacity:1; } to { transform:translate(-50%,-90px) scale(1.2); opacity:0; } }
 </style>
-  <script type="module" crossorigin src="./assets/index-Bc3VJ5oV.js"></script>
+  <script type="module" crossorigin src="./assets/index-D3NcODMw.js"></script>
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -100,7 +113,8 @@
 <div id="zzz"><span>z</span><span>z</span><span>z</span></div>
 <div id="stick" class="hidden"><div id="knob"></div></div>
 <button id="actBtn" class="hidden"></button>
-<div id="bottom"><button id="jumpBtn" class="hidden">Jump in</button><button id="shopBtn">Fix up the house</button></div>
+<div id="bottom"><button id="jumpBtn" class="hidden">Jump in</button><button id="bagBtn">Bag</button><button id="shopBtn">Fix up the house</button></div>
+<div id="bagP" class="sheet hidden"><button class="x" id="bagClose">✕</button><h2 id="bagTitle">Keira's bag</h2><p class="sub" id="bagSub">Things you've picked up around the house.</p><div id="bagGrid"></div><div id="bagInfo"></div></div>
 <div id="shop" class="sheet hidden"><button class="x" id="shopClose">✕</button><h2>Fix up the house</h2><p class="sub">Spend the pennies you bring back from other worlds.</p><div id="shopList"></div></div>
 <div id="fridgeP" class="sheet hidden"><button class="x" id="fridgeClose">✕</button><h2>The fridge</h2><p class="sub" id="fridgeNote"></p><div id="fridgeList"></div></div>
 <div id="story" class="hidden"><div id="storyWho"></div><div id="storyText"></div></div>
