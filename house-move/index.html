@@ -74,6 +74,7 @@
   .jp .pf { flex:none; width:52px; height:52px; margin-left:-36px; border-radius:50%; border:var(--edge); background:var(--paper2) center/cover; display:grid; place-items:center; font:800 24px 'Fraunces',serif; font-style:normal; color:rgba(27,20,36,.45); }
   .jp li.unk .pf { border-style:dashed; } .jp li.unk b { opacity:.55; }
   .jc { counter-reset:c; } .jc li { counter-increment:c; display:block; } .jc li::before { content:counter(c) '.'; position:absolute; left:-30px; font-weight:700; color:var(--keira); }
+  .jhead.jsub { margin-top:16px; font-size:23px; } .jn li { display:block; padding:4px 10px; margin:0 0 8px; background:#fff; border:1.5px solid rgba(27,20,36,.25); box-shadow:2px 2px 0 rgba(27,20,36,.15); rotate:-0.6deg; font-style:italic; } .jn li:nth-child(even) { rotate:0.7deg; }
   .jhead { margin:0; font:700 26px/28px 'Caveat',cursive; text-decoration:underline; text-decoration-color:var(--keira); text-underline-offset:4px; } .jcount, .jmore, .jnone { margin:0 0 12px; opacity:.6; font-size:18px; } .jmore { margin:4px 0 0; }
   .jpage em.mila { display:inline-block; margin:2px 0 0 8px; padding:0 6px; font:700 18px/24px 'Caveat',cursive; font-style:normal; color:#b06a00; background:rgba(234,166,60,.22); border-radius:4px; }
   @media (hover:hover) and (pointer:fine) and (min-width:760px) { #journalP { width:480px; } .jpage { max-height:min(60vh, 520px); } }
@@ -108,6 +109,7 @@
   .bub[data-who=mila] .name { background:var(--mila); color:var(--ink); }
   .bub .name i { position:absolute; left:-6px; top:-6px; width:34px; height:34px; border-radius:50%; border:2px solid var(--ink); background:url(./face-keira.jpg) center/cover; }
   .bub[data-who=mila] .name i { background-image:url(./face-mila.jpg); }
+  .bub[data-who=bertram] .name { background:#6b4a2b; padding-left:10px; } .bub[data-who=bertram] .name i { display:none; }
   .bub .more { position:absolute; right:12px; bottom:3px; width:0; height:0; border:6px solid transparent; border-top:8px solid var(--keira); border-bottom:0; opacity:0; }
   .bub.done .more { opacity:1; animation:nudge .8s infinite; } .bub.auto .more { display:none; }
   .bub b { color:#5b2a6b; font-weight:800; }
@@ -233,7 +235,7 @@
   @keyframes heart { from { transform:translate(-50%,0) scale(.6); opacity:1; } to { transform:translate(-50%,-90px) scale(1.2); opacity:0; } }
   @media (prefers-reduced-motion: reduce) { .bubIn, .sheet, #card, .stamp, .shout .ch.on { animation:none !important; } }
 </style>
-  <script type="module" crossorigin src="./assets/index-D2ugCdkK.js"></script>
+  <script type="module" crossorigin src="./assets/index-SEFMScph.js"></script>
 </head>
 <body>
 <canvas id="c"></canvas>
