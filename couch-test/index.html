@@ -444,6 +444,13 @@
   #team button i { position:absolute; left:0; right:0; bottom:4px; font:400 11px/1 var(--type); color:inherit; opacity:.75; letter-spacing:2px; font-style:normal; } #team .keira i { color:#fff; } #team .mila i { color:var(--tickink); }
   #team button.on { opacity:1; transform:scale(1.08); box-shadow:inset 0 -5px 8px rgba(0,0,0,.2), inset 0 4px 6px rgba(255,255,255,.35), 0 3px 0 rgba(0,0,0,.45), 0 0 0 3px var(--card) !important; }
   #team button.ready { opacity:.95; } #team button.tagme { box-shadow:inset 0 -5px 8px rgba(0,0,0,.2), 0 3px 0 rgba(0,0,0,.45), 0 0 0 4px #7fffe0 !important; }
+  /* the kick ring: a tailor's chalk circle that fills as the kick comes back */
+  #kick { position:fixed; left:50%; bottom:calc(var(--safe-bot) + 12px); width:62px; height:62px; margin-left:-31px; z-index:7; pointer-events:none; opacity:.8; transition:transform .18s cubic-bezier(.3,1.6,.5,1), opacity .2s; }
+  #kick svg { width:100%; height:100%; overflow:visible; filter:drop-shadow(0 3px 0 rgba(0,0,0,.4)); }
+  #kick .bg { fill:rgba(22,22,26,.78); stroke:rgba(244,236,216,.25); stroke-width:5; }
+  #kick .fg { fill:none; stroke:var(--tick); stroke-width:5; stroke-linecap:round; stroke-dasharray:157.1; stroke-dashoffset:0; }
+  #kick .ic { fill:rgba(244,236,216,.28); stroke:none; transition:fill .15s; transform-origin:30px 30px; }
+  #kick.ready { opacity:1; transform:scale(1.1); } #kick.ready .ic { fill:var(--tick); animation:kickpulse 1s ease-in-out infinite; } @keyframes kickpulse { 50% { transform:scale(1.14) rotate(8deg); } } #kick.ready .fg { stroke:var(--tick); filter:drop-shadow(0 0 5px var(--tick)); }
   /* ---- end of run: the receipt ---- */
   #over { background:rgba(12,6,16,.72); flex-direction:column; justify-content:center; align-items:center; gap:18px; padding:calc(var(--safe-top) + 14px) 22px calc(var(--safe-bot) + 18px); filter:drop-shadow(0 12px 16px rgba(0,0,0,.5)); }
   #recap { pointer-events:auto; width:min(320px,100%); background:var(--card) !important; background-image:none !important; color:var(--ink); border:0 !important; outline:0; border-radius:0; box-shadow:none !important; padding:20px 18px 30px; text-align:left; rotate:-1.5deg; position:relative; font-family:var(--type);
@@ -475,7 +482,7 @@
   .page.locked b { color:rgba(35,26,26,.4) !important; } .page.rare { box-shadow:0 2px 6px rgba(0,0,0,.25), 0 0 0 2px var(--tick) !important; }
 </style>
   <script type="module" crossorigin src="./assets/bob-CmufTqKX.js"></script>
-  <script type="module" crossorigin src="./assets/main-Cl8faRVs.js"></script>
+  <script type="module" crossorigin src="./assets/main-WmI1M_KN.js"></script>
 </head>
 <body data-edition="bday">
 <canvas id="c"></canvas>
@@ -497,8 +504,8 @@
   </div>
   <p id="climb"><b id="climbBest"></b><span id="climbNext"></span></p>
   <div class="seg" id="who">
-    <button id="pickKeira" class="hero keira"><i class="face"></i><u>HELLO<br>my name is</u><b>Keira</b><small>Freeze spell</small></button>
-    <button id="pickMila" class="hero mila"><i class="face"></i><u>HELLO<br>my name is</u><b>Mila</b><small>Double jump</small></button>
+    <button id="pickKeira" class="hero keira"><i class="face"></i><u>HELLO<br>my name is</u><b>Keira</b><small>Spin kick</small></button>
+    <button id="pickMila" class="hero mila"><i class="face"></i><u>HELLO<br>my name is</u><b>Mila</b><small>Double spin kick</small></button>
   </div>
   <button id="play" class="gobtn">JUMP IN</button>
   <i id="homeLadder" class="hidden"></i><i id="bookBar" class="hidden"></i>
@@ -514,6 +521,8 @@
   <div class="chip"><span class="nut"></span><span id="hudBolts">0</span></div>
   <div id="boostPip">ROCKET READY</div>
 </div>
+<div id="kick" class="hidden" aria-hidden="true"><svg viewBox="0 0 60 60"><circle class="bg" cx="30" cy="30" r="25"/><circle class="fg" cx="30" cy="30" r="25" transform="rotate(-90 30 30)"/>
+  <polygon class="ic" points="32.7,16.8 34.0,24.0 41.3,22.5 37.1,28.6 43.2,32.7 36.0,34.0 37.5,41.3 31.4,37.1 27.3,43.2 26.0,36.0 18.7,37.5 22.9,31.4 16.8,27.3 24.0,26.0 22.5,18.7 28.6,22.9"/></svg></div>
 <div id="team" class="hidden">
   <button data-i="0" class="keira" aria-label="Tag in Keira"><b>K</b>KEIRA<i>•</i></button>
   <button data-i="1" class="mila" aria-label="Tag in Mila"><b>M</b>MILA<i>••</i></button>
@@ -521,7 +530,7 @@
 </div>
 <div id="curse" class="hidden"></div>
 <div id="combo" class="hidden"><b>x2</b><span></span></div>
-<div id="hint" class="hidden">Drag to steer · Tap to fire your rocket boots</div>
+<div id="hint" class="hidden">Drag to steer · Tap to kick</div>
 
 <div id="pops" class="layer"></div>
 <div id="flash"></div>
