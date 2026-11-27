@@ -126,7 +126,15 @@
   #hotbar.nudge { animation:bump .5s ease-out 2; }
   @media (max-width:400px) { #bottom #hotrow button { width:42px; height:42px; } #hotrow, #hotbar { gap:5px; } }
   .need { position:fixed; left:0; top:0; width:0; height:0; z-index:3; pointer-events:none; }
-  .need svg { position:absolute; left:-10px; top:-22px; width:20px; height:20px; filter:drop-shadow(0 2px 2px rgba(0,0,0,.3)); animation:needBob 1.8s ease-in-out infinite; }
+  .need svg { display:block; width:100%; height:100%; }
+  .need .star { position:absolute; left:-15px; top:-17px; width:30px; height:30px; filter:drop-shadow(0 2px 2px rgba(0,0,0,.35)); animation:needBob 1.1s ease-in-out infinite; }
+  .need .drop { width:15px; height:15px; margin:-3px 1px -3px -2px; animation:needBob 1.6s ease-in-out infinite; }
+  .need .pips { position:absolute; left:0; top:0; translate:-50% -50%; display:flex; align-items:center; gap:3px; padding:4px 6px; border-radius:9px; background:rgba(27,20,36,.62); }
+  .need .pips i { width:9px; height:9px; border-radius:50%; background:rgba(255,248,230,.28); box-shadow:inset 0 0 0 1.5px rgba(255,248,230,.75); }
+  .need .pips i.on { background:#8fd06a; box-shadow:inset 0 0 0 1.5px #1b1424; }
+  .need .pips.wet { background:rgba(46,92,120,.78); }
+  .need .pips.bump { animation:pipBump .45s ease-out; }
+  @keyframes pipBump { 40% { scale:1.5; } }
   @keyframes needBob { 50% { transform:translateY(-4px); } }
   .tapRing { position:fixed; width:0; height:0; z-index:6; pointer-events:none; }
   .tapRing::before { content:""; position:absolute; left:-26px; top:-26px; width:52px; height:52px; border-radius:50%; border:3px solid rgba(255,244,214,.95); box-shadow:0 0 14px 3px rgba(230,190,110,.7); animation:tapRing .45s ease-out forwards; }
@@ -271,7 +279,7 @@
   @keyframes heart { from { transform:translate(-50%,0) scale(.6); opacity:1; } to { transform:translate(-50%,-90px) scale(1.2); opacity:0; } }
   @media (prefers-reduced-motion: reduce) { .bubIn, .sheet, #card, .stamp, .shout .ch.on { animation:none !important; } }
 </style>
-  <script type="module" crossorigin src="./assets/index-CM97PYBc.js"></script>
+  <script type="module" crossorigin src="./assets/index-B5AczmeP.js"></script>
 </head>
 <body>
 <canvas id="c"></canvas>
