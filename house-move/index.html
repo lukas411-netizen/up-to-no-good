@@ -151,7 +151,7 @@
   .bub[data-who=mila] .name { background:var(--mila); color:var(--ink); }
   .bub .name i { position:absolute; left:-6px; top:-6px; width:34px; height:34px; border-radius:50%; border:2px solid var(--ink); background:url(./face-keira.jpg) center/cover; }
   .bub[data-who=mila] .name i { background-image:url(./face-mila.jpg); }
-  .bub[data-who=bertram] .name { background:#6b4a2b; padding-left:10px; } .bub[data-who=bertram] .name i { display:none; }
+  .bub:is([data-who=bertram],[data-who=opal],[data-who=ambrose],[data-who=dot],[data-who=wren]) .name { background:#6b4a2b; padding-left:10px; } .bub:is([data-who=bertram],[data-who=opal],[data-who=ambrose],[data-who=dot],[data-who=wren]) .name i { display:none; }
   .bub .more { position:absolute; right:12px; bottom:3px; width:0; height:0; border:6px solid transparent; border-top:8px solid var(--keira); border-bottom:0; opacity:0; }
   .bub.done .more { opacity:1; animation:nudge .8s infinite; } .bub.auto .more { display:none; }
   .bub b { color:#5b2a6b; font-weight:800; }
@@ -279,7 +279,7 @@
   @keyframes heart { from { transform:translate(-50%,0) scale(.6); opacity:1; } to { transform:translate(-50%,-90px) scale(1.2); opacity:0; } }
   @media (prefers-reduced-motion: reduce) { .bubIn, .sheet, #card, .stamp, .shout .ch.on { animation:none !important; } }
 </style>
-  <script type="module" crossorigin src="./assets/index-CLhvbbNI.js"></script>
+  <script type="module" crossorigin src="./assets/index-CmMuOhBM.js"></script>
 </head>
 <body>
 <canvas id="c"></canvas>

@@ -2,3 +2,6 @@ Instrument recordings (piano, acoustic guitar, xylophone; the h-*.mp3 harp notes
 https://github.com/nbrosowsky/tonejs-instruments, samples licensed CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/),
 built from public domain sources: VSCO 2 Community Edition (Versilian Studios) and the University of Iowa Musical Instrument Samples.
 Trimmed and re-encoded for this game. This credit must appear in the game's credits.
+
+Nylon guitar notes (n-*.mp3) are from the npm package tonejs-instrument-guitar-nylon-mp3 (tonejs-instruments, as above; repository states CC BY 3.0).
+The original recordings come from a Freesound pack whose own licence has NOT been checked yet: confirm it before any store release.
