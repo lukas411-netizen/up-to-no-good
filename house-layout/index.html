@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#15111c">
+<title>The House</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,800;1,9..144,600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* One kit for the whole house: paper, a dark ink outline and a hard little shadow, so everything feels like a thing you can press. */
+  :root { --ink:#1b1424; --paper:#f4ecdc; --paper2:#e7dabd; --gold:#d6b26a; --plum:#3a2340; --teal:#2f6b63; --keira:#7a2e3a; --mila:#eaa63c;
+    --edge:2.5px solid var(--ink); --drop:0 4px 0 var(--ink), 0 14px 28px rgba(0,0,0,.32);
+    --safe-top: env(safe-area-inset-top,0px); --safe-bot: env(safe-area-inset-bottom,0px); }
+  * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; user-select:none; -webkit-user-select:none; }
+  html,body { margin:0; height:100%; overflow:hidden; background:#15111c; touch-action:none; overscroll-behavior:none; font-family:'Nunito',system-ui,sans-serif; color:var(--paper); }
+  #c { position:fixed; inset:0; width:100%; height:100%; display:block; }
+  .hidden { display:none !important; }
+  button { font-family:inherit; border:0; cursor:pointer; color:inherit; }
+  .key { display:inline-grid; place-items:center; min-width:22px; height:22px; padding:0 5px; margin-left:8px; border-radius:6px; background:var(--ink); color:var(--paper); font:800 12px 'Nunito',sans-serif; box-shadow:0 2px 0 rgba(0,0,0,.35); }
+
+  /* ----- top of the screen ----- */
+  .pill { position:fixed; top:calc(var(--safe-top) + 12px); height:40px; padding:0 13px 0 9px; border-radius:20px; display:flex; align-items:center; gap:7px;
+    background:var(--paper); color:var(--ink); border:var(--edge); box-shadow:0 3px 0 var(--ink); font-weight:800; font-size:17px; font-variant-numeric:tabular-nums; z-index:5; }
+  #wallet { left:12px; }
+  #wallet.pop { animation:pop .5s; }
+  @keyframes pop { 40% { transform:scale(1.18); } }
+  .cn { display:inline-block; width:18px; height:18px; border-radius:50%; background:radial-gradient(circle at 35% 35%,#f3b27a,#c8733a 55%,#8a4a22); box-shadow:inset 0 0 0 2px rgba(90,40,10,.35); vertical-align:-3px; margin-right:5px; flex:none; }
+  #wallet .cn { width:20px; height:20px; margin:0; }
+  #who { right:12px; height:44px; padding:0 9px 0 0; border-radius:22px; gap:8px; font-family:'Fraunces',serif; font-size:16px; }
+  #who::before { content:''; width:44px; height:44px; margin:-2.5px 0 -2.5px -2.5px; border-radius:50%; border:var(--edge); background:url(./face-keira.jpg) center/cover; box-shadow:inset 0 0 0 2px var(--keira); flex:none; }
+  #who::after { content:''; width:28px; height:28px; border-radius:50%; border:2px solid var(--ink); background:url(./face-mila.jpg) center/cover; filter:saturate(.7); opacity:.85; flex:none; }
+  #who[data-hero=mila]::before { background-image:url(./face-mila.jpg); box-shadow:inset 0 0 0 2px var(--mila); }
+  #who[data-hero=mila]::after { background-image:url(./face-keira.jpg); }
+  #who:active, #helpBtn:active { transform:translateY(2px); box-shadow:0 1px 0 var(--ink); }
+  #dayPill { left:12px; top:calc(var(--safe-top) + 98px); height:26px; padding:0 10px 0 26px; font-size:12px; font-weight:800; letter-spacing:.04em; box-shadow:0 2px 0 var(--ink); border-width:2px; pointer-events:none; }
+  #dayPill::before { content:''; position:absolute; left:8px; top:6px; width:11px; height:11px; border-radius:50%; background:#f0c24a; box-shadow:0 0 0 2px rgba(240,194,74,.3); }
+  #dayPill[data-phase=evening]::before { background:#e2703a; } #dayPill[data-phase=night]::before { background:#f4ecdc; box-shadow:inset -4px -2px 0 #3a2340; }
+  #buddy { left:12px; top:calc(var(--safe-top) + 60px); height:30px; padding:0 11px; font-size:13px; font-weight:700; box-shadow:0 2px 0 var(--ink); border-width:2px; }
+  #helpBtn { position:fixed; left:50%; margin-left:-19px; top:calc(var(--safe-top) + 12px); z-index:5; width:38px; height:38px; border-radius:50%; border:var(--edge); font:800 18px 'Fraunces',serif; color:var(--ink); background:var(--paper); box-shadow:0 3px 0 var(--ink); }
+  #toast { display:none; }
+
+  /* ----- the to-do notepad: yellow lined paper, so it never reads as a button or a speech bubble ----- */
+  #quest { position:fixed; right:12px; top:calc(var(--safe-top) + 68px); width:218px; z-index:5; color:#2a2238; background:#ffe680; background-image:repeating-linear-gradient(transparent 0 25px, rgba(60,90,160,.22) 25px 26px); background-position:0 37px;
+    border:var(--edge); border-radius:3px 3px 12px 3px; box-shadow:0 3px 0 var(--ink), 0 10px 22px rgba(0,0,0,.28); transform:rotate(1.2deg); transform-origin:100% 0; }
+  #quest::before { content:''; position:absolute; left:50%; top:-9px; width:54px; height:16px; margin-left:-27px; background:rgba(244,236,220,.75); border:1.5px solid rgba(27,20,36,.35); transform:rotate(-3deg); pointer-events:none; }
+  #quest .top { display:flex; align-items:center; width:100%; height:36px; padding:0 10px 0 12px; gap:8px; background:none; font:800 12px 'Nunito',sans-serif; letter-spacing:.14em; text-transform:uppercase; color:var(--keira); border-bottom:2px solid rgba(190,60,60,.5); }
+  #quest .top .n { margin-left:auto; min-width:22px; height:22px; padding:0 6px; border-radius:11px; background:var(--keira); color:var(--paper); display:grid; place-items:center; letter-spacing:0; }
+  #quest .top .fold { width:0; height:0; border:6px solid transparent; border-bottom:8px solid var(--ink); border-top:0; transition:transform .2s; }
+  #quest.shut { width:auto; background-image:none; } #quest.shut .top { border-bottom:0; } #quest.shut .top .fold { transform:rotate(180deg); }
+  #quest.shut ul, #quest.shut .moreBtn { display:none; }
+  #quest ul { list-style:none; margin:0; padding:1px 10px 4px; }
+  #quest li { display:flex; gap:8px; align-items:flex-start; min-height:26px; padding-top:2px; font:700 19px/26px 'Caveat','Bradley Hand',cursive; }
+  #quest li i { flex:none; width:15px; height:15px; margin-top:5px; border:2px solid var(--ink); border-radius:3px; background:rgba(255,255,255,.55); position:relative; }
+  #quest li.done { opacity:.6; text-decoration:line-through; text-decoration-thickness:2px; }
+  #quest li.done i::after { content:''; position:absolute; left:2px; top:-6px; width:7px; height:13px; border:solid var(--keira); border-width:0 3px 3px 0; transform:rotate(40deg); }
+  #quest li.new { animation:up .3s ease-out; }
+  #quest .jBtn { display:block; width:calc(100% - 16px); height:30px; margin:4px 8px 8px; border-radius:8px; border:2px solid var(--ink); background:var(--paper); box-shadow:0 2px 0 var(--ink); font:800 12.5px 'Nunito',sans-serif; color:var(--ink); }
+  #quest.shut .jBtn { display:none; }
+  /* ----- Keira's notebook: lined pages, her handwriting, Mila's mustard scribbles in the margin ----- */
+  #journalP { background:#fbf6e6; }
+  #journalP .glyph { background-color:var(--keira); }
+  .jtabs { display:flex; gap:6px; margin:0 0 -2px; padding:0 2px; }
+  .jtabs button { flex:1; height:36px; white-space:nowrap; border:var(--edge); border-bottom:0; border-radius:10px 10px 0 0; background:var(--paper2); font:800 13px 'Nunito',sans-serif; color:var(--ink); opacity:.75; display:flex; align-items:center; justify-content:center; gap:6px; }
+  .jtabs button.on { background:#fffbe8; opacity:1; height:40px; margin-top:-4px; }
+  .jtabs button span { min-width:20px; height:20px; padding:0 5px; border-radius:10px; background:var(--keira); color:var(--paper); font-size:11.5px; display:grid; place-items:center; }
+  .jpage { border:var(--edge); border-radius:0 0 12px 12px; background:#fffbe8; background-image:linear-gradient(90deg, transparent 33px, rgba(200,70,70,.35) 33px 35px, transparent 35px), repeating-linear-gradient(transparent 0 27px, rgba(60,90,160,.2) 27px 28px); padding:10px 12px 14px 44px; max-height:min(52vh, 430px); overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; font:600 20px/28px 'Caveat','Bradley Hand',cursive; color:#2a2238; }
+  .jpage ul, .jpage ol { list-style:none; margin:0; padding:0; }
+  .jpage li { position:relative; display:flex; gap:10px; align-items:flex-start; padding:0 0 12px; }
+  .jpage li > div { flex:1; min-width:0; } .jpage b { display:block; font-weight:700; font-size:22px; line-height:28px; } .jpage li span { display:block; opacity:.82; }
+  .jq li > i { flex:none; width:17px; height:17px; margin:6px 0 0 -34px; border:2px solid var(--ink); border-radius:3px; background:rgba(255,255,255,.6); position:relative; }
+  .jq li.done b { text-decoration:line-through; text-decoration-thickness:2px; opacity:.6; } .jq li.done span { opacity:.6; }
+  .jq li.done > i::after { content:''; position:absolute; left:3px; top:-7px; width:8px; height:15px; border:solid var(--keira); border-width:0 3px 3px 0; transform:rotate(40deg); }
+  .jq li > i + div { margin-left:7px; }
+  .jp .pf { flex:none; width:52px; height:52px; margin-left:-36px; border-radius:50%; border:var(--edge); background:var(--paper2) center/cover; display:grid; place-items:center; font:800 24px 'Fraunces',serif; font-style:normal; color:rgba(27,20,36,.45); }
+  .jp li.unk .pf { border-style:dashed; } .jp li.unk b { opacity:.55; }
+  .jc { counter-reset:c; } .jc li { counter-increment:c; display:block; } .jc li::before { content:counter(c) '.'; position:absolute; left:-30px; font-weight:700; color:var(--keira); }
+  .jhead.jsub { margin-top:16px; font-size:23px; } .jn li { display:block; padding:4px 10px; margin:0 0 8px; background:#fff; border:1.5px solid rgba(27,20,36,.25); box-shadow:2px 2px 0 rgba(27,20,36,.15); rotate:-0.6deg; font-style:italic; } .jn li:nth-child(even) { rotate:0.7deg; }
+  .jhead { margin:0; font:700 26px/28px 'Caveat',cursive; text-decoration:underline; text-decoration-color:var(--keira); text-underline-offset:4px; } .jcount, .jmore, .jnone { margin:0 0 12px; opacity:.6; font-size:18px; } .jmore { margin:4px 0 0; }
+  .jpage em.mila { display:inline-block; margin:2px 0 0 8px; padding:0 6px; font:700 18px/24px 'Caveat',cursive; font-style:normal; color:#b06a00; background:rgba(234,166,60,.22); border-radius:4px; }
+  @media (hover:hover) and (pointer:fine) and (min-width:760px) { #journalP { width:480px; } .jpage { max-height:min(60vh, 520px); } }
+  #quest .moreBtn { display:block; width:100%; height:30px; background:none; font:800 12px 'Nunito',sans-serif; color:#5b2a6b; text-align:left; padding:0 12px; }
+  @media (hover:hover) and (pointer:fine) and (min-width:760px) { #quest { width:250px; } }
+
+  /* ----- bottom buttons ----- */
+  #bottom { position:fixed; left:0; right:0; bottom:calc(var(--safe-bot) + 18px); display:flex; justify-content:center; gap:12px; z-index:5; pointer-events:none; }
+  #bottom button { pointer-events:auto; display:flex; align-items:center; gap:8px; height:52px; padding:0 20px 0 16px; border-radius:26px; font-weight:800; font-size:17px; background:var(--paper); color:var(--ink); border:var(--edge); box-shadow:var(--drop); transition:transform .08s, box-shadow .08s; }
+  #bottom button:active, .gold:active, #cardOpts button:active, #bagInfo .opts button:active { transform:translateY(3px); box-shadow:0 1px 0 var(--ink); }
+  #bottom button svg { width:24px; height:24px; flex:none; }
+  #bottom, #quest { transition:opacity .25s, translate .3s; }
+  body.intalk #bottom { opacity:0; translate:0 90px; pointer-events:none; }   /* a story scene has the floor */
+  @media (max-width:759px) { body.intalk #quest { opacity:0; pointer-events:none; } }
+  #bagBtn.bump { animation:bump .35s ease-out; }
+  @keyframes bump { 40% { transform:scale(1.18); } }
+  #bottom #jumpBtn { background:linear-gradient(135deg,#7a3cff,#2fd4ff); color:#fff; padding:0 22px; animation:glow 1.6s infinite; }
+  @keyframes glow { 50% { box-shadow:0 4px 0 var(--ink), 0 0 30px rgba(122,60,255,.8); } }
+  #bottom #actBtn { background:linear-gradient(180deg,#f6e2a8,var(--gold)); padding:0 22px; animation:pop .3s; white-space:nowrap; max-width:calc(100vw - 130px); overflow:hidden; text-overflow:ellipsis; }
+  @media (hover:hover) and (pointer:fine) { #bottom #actBtn::after { content:'E'; display:inline-grid; place-items:center; min-width:22px; height:22px; margin-left:4px; border-radius:6px; background:var(--ink); color:var(--paper); font:800 12px 'Nunito',sans-serif; } }
+  .crowd { display:none !important; }
+
+  /* ----- speech bubbles, thoughts and captions (src/ui.ts moves them every frame) ----- */
+  #talk { position:fixed; inset:0; z-index:23; pointer-events:none; overflow:hidden; }
+  /* a scene: dark bars slide in top and bottom, the buttons step aside, the view stays straight on */
+  body::before, body::after { content:""; position:fixed; left:0; right:0; height:9vh; background:#17121b; z-index:21; pointer-events:none; transition:transform .45s ease; }
+  body::before { top:0; transform:translateY(-101%); } body::after { bottom:0; transform:translateY(101%); }
+  body.scene::before, body.scene::after { transform:none; }
+  body.scene #bottom, body.scene #quest, body.scene #wallet, body.scene #who, body.scene #buddy, body.scene #dayPill, body.scene #helpBtn { opacity:0; pointer-events:none; transition:opacity .3s; }
+  /* the hotbar: what she can hold, one thing at a time, then the bag and the house list */
+  #bottom { flex-direction:column; align-items:center; gap:10px; bottom:calc(var(--safe-bot) + 10px); }
+  #bottom > #jumpBtn, #bottom > #actBtn { order:-1; }
+  #hotrow { display:flex; align-items:flex-end; gap:6px; pointer-events:none; max-width:calc(100vw - 16px); }
+  #hotbar { display:flex; gap:6px; }
+  #hotrow .lbl { display:none; }
+  #bottom #hotrow button { position:relative; width:46px; height:46px; padding:0; border-radius:13px; justify-content:center; gap:0; flex:none; }
+  #bottom #hotrow button svg, #bottom #hotrow button .ico { width:28px; height:28px; margin:0; }
+  #bottom .hslot.empty { background:var(--paper2); box-shadow:inset 0 2px 5px rgba(60,40,10,.22); border-color:rgba(27,20,36,.35); opacity:.75; }
+  #bottom .hslot.on { background:linear-gradient(180deg,#f6e2a8,var(--gold)); translate:0 -7px; box-shadow:0 7px 0 var(--ink); }
+  #bottom .hslot b { position:absolute; right:-4px; bottom:-4px; min-width:18px; height:18px; padding:0 4px; border-radius:9px; background:var(--ink); color:var(--paper); font:800 11px 'Nunito',sans-serif; display:grid; place-items:center; }
+  #bottom .hslot .key { position:absolute; left:-4px; top:-6px; margin:0; }
+  #bottom #bagBtn { margin-left:6px; }
+  #bottom #bagBtn .key { position:absolute; left:-4px; top:-6px; margin:0; }
+  #hotrow .crowd { display:flex !important; }
+  #bottom .hslot .pk { display:grid; place-items:center; width:30px; height:36px; border-radius:4px; background:#f6dd62; border:1.5px solid var(--ink); box-shadow:inset 0 5px 0 rgba(255,255,255,.55); } #bottom #hotrow .hslot .pk .ico { width:22px; height:22px; }
+  #hotbar.nudge { animation:bump .5s ease-out 2; }
+  @media (max-width:400px) { #bottom #hotrow button { width:42px; height:42px; } #hotrow, #hotbar { gap:5px; } }
+  .need { position:fixed; left:0; top:0; width:0; height:0; z-index:3; pointer-events:none; }
+  .need svg { display:block; width:100%; height:100%; }
+  .need .star { position:absolute; left:-15px; top:-17px; width:30px; height:30px; filter:drop-shadow(0 2px 2px rgba(0,0,0,.35)); animation:needBob 1.1s ease-in-out infinite; }
+  .need .drop { width:15px; height:15px; margin:-3px 1px -3px -2px; animation:needBob 1.6s ease-in-out infinite; }
+  .need .pips { position:absolute; left:0; top:0; translate:-50% -50%; display:flex; align-items:center; gap:3px; padding:4px 6px; border-radius:9px; background:rgba(27,20,36,.62); }
+  .need .pips i { width:9px; height:9px; border-radius:50%; background:rgba(255,248,230,.28); box-shadow:inset 0 0 0 1.5px rgba(255,248,230,.75); }
+  .need .pips i.on { background:#8fd06a; box-shadow:inset 0 0 0 1.5px #1b1424; }
+  .need .pips.wet { background:rgba(46,92,120,.78); }
+  .need .pips.bump { animation:pipBump .45s ease-out; }
+  @keyframes pipBump { 40% { scale:1.5; } }
+  @keyframes needBob { 50% { transform:translateY(-4px); } }
+  .tapRing { position:fixed; width:0; height:0; z-index:6; pointer-events:none; }
+  .tapRing::before { content:""; position:absolute; left:-26px; top:-26px; width:52px; height:52px; border-radius:50%; border:3px solid rgba(255,244,214,.95); box-shadow:0 0 14px 3px rgba(230,190,110,.7); animation:tapRing .45s ease-out forwards; }
+  @keyframes tapRing { from { transform:scale(.25); opacity:1; } to { transform:scale(1.15); opacity:0; } }
+  /* narration sits above the bar on a phone */
+  @media (max-width:700px) { .narr { margin-top:-64px; } }
+  #story { position:fixed; inset:0; z-index:22; background:transparent; }
+  .bub { position:absolute; left:0; top:0; max-width:min(266px, calc(100vw - 16px)); min-width:96px; transition:opacity .22s; will-change:transform; }
+  .bubIn { position:relative; padding:17px 16px 13px; border-radius:18px; background:var(--paper); color:var(--ink); border:var(--edge); box-shadow:var(--drop); font-size:17px; font-weight:700; line-height:1.32; animation:bubPop .34s cubic-bezier(.3,1.5,.5,1); }
+  .bub.old { opacity:.8; } .bub.out, .bub.under { opacity:0; }
+  .bub .tail { position:absolute; bottom:-9.5px; width:16px; height:16px; background:var(--paper); border-right:var(--edge); border-bottom:var(--edge); transform:rotate(45deg); border-radius:0 0 4px 0; }
+  .bub.raised .tail { display:none; }
+  .bub .name { position:absolute; top:-15px; left:12px; height:26px; display:flex; align-items:center; padding:0 10px 0 32px; border-radius:13px; border:2px solid var(--ink); font:800 12px 'Fraunces',serif; letter-spacing:.09em; text-transform:uppercase; color:var(--paper); background:var(--keira); }
+  .bub[data-who=mila] .name { background:var(--mila); color:var(--ink); }
+  .bub .name i { position:absolute; left:-6px; top:-6px; width:34px; height:34px; border-radius:50%; border:2px solid var(--ink); background:url(./face-keira.jpg) center/cover; }
+  .bub[data-who=mila] .name i { background-image:url(./face-mila.jpg); }
+  .bub:is([data-who=bertram],[data-who=opal],[data-who=ambrose],[data-who=dot],[data-who=wren]) .name { background:#6b4a2b; padding-left:10px; } .bub:is([data-who=bertram],[data-who=opal],[data-who=ambrose],[data-who=dot],[data-who=wren]) .name i { display:none; }
+  .bub .more { position:absolute; right:12px; bottom:3px; width:0; height:0; border:6px solid transparent; border-top:8px solid var(--keira); border-bottom:0; opacity:0; }
+  .bub.done .more { opacity:1; animation:nudge .8s infinite; } .bub.auto .more { display:none; }
+  .bub b { color:#5b2a6b; font-weight:800; }
+  .ch { opacity:0; } .ch.on { opacity:1; }
+  .shout { font-style:normal; font-weight:800; color:var(--keira); display:inline-block; white-space:nowrap; } .shout .ch { display:inline-block; } .shout .ch.on { animation:shake .32s; }
+  .bub.thought .bubIn { border-style:dashed; padding-top:13px; font-weight:700; font-size:16px; }
+  .bub.thought .tail { width:10px; height:10px; border:var(--edge); border-radius:50%; transform:none; bottom:-16px; }
+  .narr { position:absolute; left:50%; top:0; width:min(520px, calc(100vw - 24px)); padding:14px 18px; border-radius:16px; background:rgba(27,20,36,.93); color:var(--paper); border:1.5px solid var(--gold); box-shadow:0 12px 30px rgba(0,0,0,.4); font:italic 600 18px/1.4 'Fraunces',serif; text-align:center; }
+  @media (hover:hover) and (pointer:fine) and (min-width:760px) { .bub { max-width:330px; } .bubIn { font-size:18px; } }
+  @keyframes bubPop { from { transform:scale(.55); opacity:0; } }
+  @keyframes nudge { 50% { transform:translateY(3px); } }
+  @keyframes shake { 0% { transform:translateY(-5px) rotate(-6deg) scale(1.3); } 50% { transform:translateY(2px) rotate(4deg); } }
+
+  /* ----- panels: bag, fix up the house, fridge, help ----- */
+  .sheet { position:fixed; left:0; right:0; bottom:-3px; padding:16px 16px calc(var(--safe-bot) + 22px); background:var(--paper); color:var(--ink); border:var(--edge); border-radius:22px 22px 0 0;
+    background-image:radial-gradient(rgba(120,90,40,.07) 1px, transparent 1.2px); background-size:6px 6px;
+    box-shadow:0 -10px 40px rgba(0,0,0,.45); z-index:8; max-height:74vh; max-width:460px; margin:0 auto; overflow:auto; animation:up .3s ease-out; touch-action:pan-y; }
+  @keyframes up { from { transform:translateY(40%); opacity:0; } }
+  @media (hover:hover) and (pointer:fine) and (min-width:900px) {
+    .sheet { left:auto; right:40px; bottom:auto; top:50%; width:440px; margin:0; transform:translateY(-50%); border-radius:20px; padding:18px 18px 20px; box-shadow:0 6px 0 var(--ink), 0 24px 50px rgba(0,0,0,.45); max-height:calc(100vh - 150px); animation:sheetIn .25s ease-out; }
+    @keyframes sheetIn { from { opacity:0; margin-top:16px; } }
+  }
+  .sheet header { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+  .sheet header > div { flex:1; min-width:0; }
+  .sheet .face, .sheet .glyph { width:46px; height:46px; border-radius:50%; border:var(--edge); flex:none; display:grid; place-items:center; background:var(--gold) center/cover; font:800 24px 'Fraunces',serif; font-style:normal; }
+  .sheet .glyph svg { width:26px; height:26px; }
+  #bagP .face { background-image:url(./face-keira.jpg); } #bagP[data-who=mila] .face { background-image:url(./face-mila.jpg); }
+  .sheet h2 { font-family:'Fraunces',serif; margin:0; font-size:23px; line-height:1.1; }
+  .sheet .sub { margin:2px 0 0; opacity:.7; font-size:13.5px; font-weight:600; }
+  .sheet .x { width:38px; height:38px; border-radius:50%; border:var(--edge); background:var(--paper); box-shadow:0 2px 0 var(--ink); color:var(--ink); font-weight:800; font-size:16px; flex:none; }
+  #bagP { overflow:visible; max-height:none; }
+  #bagWho { position:absolute; top:-33px; left:18px; display:flex; gap:4px; }
+  #bagWho button { height:33px; padding:0 16px; border-radius:12px 12px 0 0; border:var(--edge); border-bottom:0; font:800 14px 'Fraunces',serif; letter-spacing:.04em; background:var(--paper2); color:var(--ink); transform:translateY(4px); }
+  #bagP:not([data-who=mila]) #bagWho [data-w=keira] { background:var(--keira); color:var(--paper); transform:none; }
+  #bagP[data-who=mila] #bagWho [data-w=mila] { background:var(--mila); transform:none; }
+  #bagGrid { display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; }
+  #bagGrid .slot { position:relative; aspect-ratio:1; border-radius:13px; background:var(--paper2); box-shadow:inset 0 2px 5px rgba(60,40,10,.22); outline:1.5px dashed rgba(60,40,10,.28); outline-offset:-5px; display:flex; align-items:center; justify-content:center; font-size:30px; padding:0; color:inherit; }
+  #bagGrid .slot.sel { background:#f3d98a; outline:none; border:var(--edge); box-shadow:0 3px 0 var(--ink); transform:translateY(-2px); }
+  #bagGrid .slot.sel img { animation:bump .35s; }
+  #bagGrid .slot b { position:absolute; right:4px; bottom:4px; min-width:20px; height:20px; padding:0 5px; border-radius:10px; background:var(--ink); color:var(--paper); font:800 12px 'Nunito',sans-serif; display:grid; place-items:center; }
+  #bagInfo { display:flex; gap:12px; min-height:104px; margin-top:14px; }
+  #bagInfo > div { flex:1; min-width:0; }
+  #bagInfo h3 { margin:0 0 2px; font-family:'Fraunces',serif; font-size:18px; }
+  #bagInfo p { margin:0 0 10px; font-size:14.5px; line-height:1.35; font-weight:600; }
+  #bagInfo .opts { display:flex; flex-wrap:wrap; gap:8px; }
+  #bagInfo .opts button, #cardOpts button { height:40px; padding:0 16px; border-radius:20px; font-weight:800; font-size:15px; background:var(--paper); color:var(--ink); border:var(--edge); box-shadow:0 3px 0 var(--ink); transition:transform .08s, box-shadow .08s; }
+  #bagInfo .opts button:first-child, #cardOpts button:first-child { background:linear-gradient(180deg,#f6e2a8,var(--gold)); }
+  .ico { width:1.5em; height:1.5em; vertical-align:middle; margin:-.3em .1em -.2em 0; filter:drop-shadow(0 2px 2px rgba(0,0,0,.25)); }
+  .ico.big { width:60px; height:60px; margin:0; flex:none; }
+  .slotIco { width:80%; height:80%; margin:0; filter:drop-shadow(0 3px 2px rgba(0,0,0,.28)); }
+  .flyIcon { position:fixed; z-index:40; font-size:28px; pointer-events:none; transition:transform .7s cubic-bezier(.5,-0.2,.7,1), opacity .7s; }
+  #fridgeP { max-height:calc(100vh - 90px); overflow-y:auto; overscroll-behavior:contain; }
+  .coldHead { display:flex; align-items:baseline; gap:8px; margin:14px 2px 6px; } .coldHead b { font:800 11px 'Nunito',sans-serif; letter-spacing:.12em; text-transform:uppercase; color:var(--keira); } .coldHead span { font-size:13px; font-weight:600; opacity:.7; }
+  .coldGrid { display:grid; grid-template-columns:repeat(8, 1fr); gap:6px; } .coldGrid.in { padding:8px; border-radius:14px; background:#cfe6e2; border:2px solid rgba(27,20,36,.16); }
+  .coldGrid .slot { position:relative; aspect-ratio:1; border-radius:10px; background:rgba(255,255,255,.6); box-shadow:inset 0 2px 4px rgba(20,60,60,.18); display:flex; align-items:center; justify-content:center; padding:0; min-width:0; }
+  .coldGrid.out .slot { background:var(--paper2); outline:1.5px dashed rgba(60,40,10,.28); outline-offset:-4px; }
+  .coldGrid .slot .ico { width:82%; height:82%; } .coldGrid .slot b { position:absolute; right:1px; bottom:1px; min-width:16px; height:16px; padding:0 3px; border-radius:8px; background:var(--ink); color:var(--paper); font:800 10.5px 'Nunito',sans-serif; display:grid; place-items:center; }
+  @media (max-width:759px) { .coldGrid { grid-template-columns:repeat(4, 1fr); } .coldGrid.in { grid-template-columns:repeat(8, 1fr); } }
+  .row { display:flex; width:100%; align-items:center; gap:12px; text-align:left; padding:10px; margin:8px 0 0; border-radius:14px; background:#fffaf0; color:var(--ink); font-size:16px; border:2px solid rgba(27,20,36,.16); }
+  .row .th { width:58px; height:58px; border-radius:10px; border:2px solid var(--ink); background:#e9dcc0 center/contain no-repeat; flex:none; }
+  .row .tx { flex:1; min-width:0; }
+  .row b { display:block; font:800 16.5px/1.2 'Fraunces',serif; }
+  .row small { display:block; opacity:.7; font-size:13px; font-weight:600; line-height:1.3; margin-top:2px; }
+  .row small.kick { font:800 10.5px 'Nunito',sans-serif; letter-spacing:.12em; text-transform:uppercase; color:var(--keira); opacity:1; margin:0 0 1px; }
+  .row small.short { color:var(--keira); opacity:.9; }
+  .row .price { display:inline-flex; align-items:center; height:40px; padding:0 14px 0 9px; border-radius:20px; white-space:nowrap; font-weight:800; font-variant-numeric:tabular-nums; background:linear-gradient(180deg,#f6e2a8,var(--gold)); border:var(--edge); box-shadow:0 3px 0 var(--ink); }
+  .row .price.short { background:var(--paper2); opacity:.75; }
+  .row:active .price:not(.short) { transform:translateY(3px); box-shadow:0 0 0 var(--ink); }
+  .stamp { font:800 11px 'Nunito',sans-serif; letter-spacing:.1em; text-transform:uppercase; color:var(--teal); border:2.5px solid var(--teal); border-radius:6px; padding:4px 7px; transform:rotate(-7deg); white-space:nowrap; animation:stamp .3s cubic-bezier(.3,1.6,.5,1); }
+  @keyframes stamp { from { transform:rotate(-7deg) scale(2.2); opacity:0; } }
+  .row.fabric { flex-wrap:wrap; }
+  .row.outfit .dots { display:flex; flex:none; width:58px; } .row.outfit .dots i { width:26px; height:26px; margin-right:-9px; border-radius:50%; border:2px solid var(--ink); background:var(--paper2); }
+  .row.outfit.locked { opacity:.62; } .row.outfit.locked .dots i { border-style:dashed; }
+  .swatches { display:flex; flex-wrap:wrap; gap:10px; width:100%; padding:2px 0 2px 70px; }
+  .swatches button { width:42px; height:42px; border-radius:50%; border:2.5px solid rgba(27,20,36,.25); box-shadow:inset 0 -6px 10px rgba(0,0,0,.18); }
+  .swatches button.on { border-color:var(--ink); box-shadow:inset 0 -6px 10px rgba(0,0,0,.18), 0 3px 0 var(--ink); transform:translateY(-2px); }
+  .tip { opacity:.6; font-size:13px; font-weight:600; margin:12px 2px 0; }
+  .help { display:grid; grid-template-columns:auto 1fr; gap:10px 14px; align-items:center; font-size:15px; font-weight:600; }
+  .help .k { display:flex; gap:4px; justify-content:flex-end; }
+  .cap { display:inline-grid; place-items:center; min-width:30px; height:30px; padding:0 8px; border-radius:8px; background:#fffaf0; border:2px solid var(--ink); box-shadow:0 3px 0 var(--ink); font-weight:800; font-size:13px; white-space:nowrap; }
+  .cap.g { background:var(--gold); }
+  @media (hover:hover) and (pointer:fine) { .touchOnly { display:none !important; } }
+  @media not ((hover:hover) and (pointer:fine)) { .keysOnly { display:none !important; } }
+
+  /* ----- the card for a thing you looked at ----- */
+  #card { position:fixed; left:10px; right:10px; max-width:520px; margin:0 auto; bottom:calc(var(--safe-bot) + 14px); z-index:30; background:var(--paper); color:var(--ink); border:var(--edge); border-radius:16px; padding:15px 16px; box-shadow:var(--drop); }
+  #card.in { animation:up .25s ease-out; }
+  #card.beside { right:auto; bottom:auto; width:310px; margin:0; }
+  #card.beside.in { animation:bubPop .28s cubic-bezier(.3,1.4,.5,1); }
+  #card .ptr { display:none; position:absolute; width:16px; height:16px; background:var(--paper); border-left:var(--edge); border-bottom:var(--edge); transform:rotate(45deg); left:-9.5px; top:22px; }
+  #card.beside .ptr { display:block; } #card.beside.flip .ptr { left:auto; right:-9.5px; transform:rotate(225deg); }
+  #cardName { font-family:'Fraunces',serif; font-weight:800; font-size:20px; line-height:1.15; margin-bottom:4px; padding-right:38px; }
+  #cardText { font-size:16px; line-height:1.4; font-weight:600; } #cardText b { color:#5b2a6b; } #cardText .rem { display:block; margin-top:6px; opacity:.72; font-size:15px; }
+  #cardOpts { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; } #cardOpts:empty { display:none; }
+  #cardOpts button { height:42px; }
+  #cardX { position:absolute; right:9px; top:9px; width:32px; height:32px; border-radius:50%; background:var(--paper); border:2px solid var(--ink); color:var(--ink); font-weight:800; font-size:14px; }
+
+  /* ----- everything else ----- */
+  #zzz { position:fixed; left:0; top:0; pointer-events:none; font-family:'Fraunces',serif; font-weight:800; color:rgba(244,236,220,.8); font-size:15px; z-index:4; transition:opacity .3s; }
+  #zzz span { position:absolute; animation:z 2.4s infinite; opacity:0; }
+  #zzz span:nth-child(2) { animation-delay:.8s; font-size:12px; } #zzz span:nth-child(3) { animation-delay:1.6s; font-size:10px; }
+  @keyframes z { 0% { transform:translate(0,0); opacity:0; } 20% { opacity:1; } 100% { transform:translate(18px,-40px); opacity:0; } }
+  #flash { position:fixed; inset:0; background:radial-gradient(circle,#eef3ff,#9fb2cf 40%,#0a1322); opacity:0; pointer-events:none; transition:opacity .4s; z-index:20; }
+  #flash.on { opacity:1; }
+  #fade { position:fixed; inset:0; background:#0c0a10; opacity:0; pointer-events:none; transition:opacity .4s ease; z-index:24; }
+  #fade.on { opacity:1; }
+  #loading, #intro { position:fixed; inset:0; display:grid; place-items:center; background:radial-gradient(circle at 50% 40%,#2c2140,#120d18); z-index:32; text-align:center; padding:24px; }
+  #loading { font-family:'Fraunces',serif; font-size:22px; opacity:.85; }
+  #intro { background:rgba(12,9,16,.55); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); }
+  .card { max-width:360px; }
+  .card .kicker { letter-spacing:.2em; text-transform:uppercase; font-size:12px; opacity:.7; }
+  .card h1 { font-family:'Fraunces',serif; font-weight:800; font-size:40px; line-height:1; margin:10px 0 12px; color:#f6e6bd; text-shadow:0 2px 0 #3a2340, 0 10px 30px rgba(0,0,0,.6); }
+  .card p { font-size:16px; line-height:1.45; opacity:.85; margin:0 0 22px; }
+  .card button, #mapClose { height:52px; padding:0 30px; border-radius:26px; background:linear-gradient(180deg,#f6e2a8,var(--gold)); color:var(--ink); border:var(--edge); box-shadow:var(--drop); font-weight:800; font-size:17px; }
+  #mapP { position:fixed; inset:0; z-index:12; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; background:rgba(10,7,14,.72); padding:20px; }
+  #mapCanvas { width:auto; height:auto; max-width:min(88vw,420px); max-height:72vh; border-radius:6px; box-shadow:0 20px 50px rgba(0,0,0,.6); transform:rotate(-1.5deg); animation:up .4s ease-out; }
+  #stick { position:fixed; left:-60px; top:-60px; width:120px; height:120px; border-radius:50%; pointer-events:none; z-index:7;
+    background:radial-gradient(circle, rgba(244,236,220,.10), rgba(244,236,220,.22)); border:2px solid rgba(244,236,220,.45); box-shadow:0 0 24px rgba(0,0,0,.25); }
+  #near { position:fixed; left:0; top:0; width:0; height:0; pointer-events:none; z-index:4; }
+  #near i { position:absolute; left:-9px; top:-9px; width:18px; height:18px; border-radius:50%; border:2px solid rgba(255,244,214,.95); background:rgba(246,214,140,.35); box-shadow:0 0 16px 4px rgba(230,190,110,.75); animation:nearPulse 1.4s ease-in-out infinite; }
+  @keyframes nearPulse { 0%,100% { transform:scale(.8); opacity:.55; } 50% { transform:scale(1.25); opacity:1; } }
+  #stick.run { border-color:rgba(214,178,106,.95); box-shadow:0 0 22px rgba(214,178,106,.45); }
+  #knob { position:absolute; left:34px; top:34px; width:52px; height:52px; border-radius:50%; background:rgba(244,236,220,.85); box-shadow:0 4px 14px rgba(0,0,0,.35); }
+  .heart { position:fixed; z-index:8; pointer-events:none; color:#ff6b8a; font-size:24px; animation:heart 1.4s ease-out forwards; text-shadow:0 2px 6px rgba(0,0,0,.3); }
+  @keyframes heart { from { transform:translate(-50%,0) scale(.6); opacity:1; } to { transform:translate(-50%,-90px) scale(1.2); opacity:0; } }
+  @media (prefers-reduced-motion: reduce) { .bubIn, .sheet, #card, .stamp, .shout .ch.on { animation:none !important; } }
+</style>
+  <script type="module" crossorigin src="./assets/index-S1FlKp_2.js"></script>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="quest" class="hidden"></div>
+<div id="wallet" class="pill"><i class="cn"></i><span id="coinN">0</span></div>
+<button id="who" class="pill">Keira</button>
+<div id="buddy" class="pill hidden"></div>
+<div id="dayPill" class="pill"></div>
+<div id="toast"></div>
+<div id="zzz"><span>z</span><span>z</span><span>z</span></div>
+<div id="near" class="hidden"><i></i></div>
+<button id="helpBtn" aria-label="Controls">?</button>
+<div id="helpP" class="sheet hidden"><header><i class="glyph">?</i><div><h2>How to get around</h2><p class="sub keysOnly">Keyboard and mouse</p><p class="sub touchOnly">Touch</p></div><button class="x" id="helpClose" aria-label="Close">✕</button></header>
+<div class="help keysOnly"><span class="k"><i class="cap">W</i><i class="cap">A</i><i class="cap">S</i><i class="cap">D</i></span><span>Move. Arrow keys work too.</span><span class="k"><i class="cap">Shift</i></span><span>Hold to stroll</span><span class="k"><i class="cap g">E</i></span><span>Use what is in front of you. Space works too.</span><span class="k"><i class="cap">Click</i></span><span>A thing, to use it. Hold the button down to read about it.</span><span class="k"><i class="cap">Click floor</i></span><span>Walk there</span><span class="k"><i class="cap">Q</i></span><span>Swap sisters</span><span class="k"><i class="cap">B</i></span><span>Open the bag. 1 to 6 hold something from the bar.</span><span class="k"><i class="cap">Wheel</i></span><span>Zoom</span></div>
+<div class="help touchOnly"><span class="k"><i class="cap">Drag</i></span><span>Anywhere, to move. Push gently to stroll.</span><span class="k"><i class="cap">Tap</i></span><span>A thing, to use it. Doors open, the piano plays.</span><span class="k"><i class="cap g">Hold</i></span><span>On a thing, to read about it and see its other choices</span><span class="k"><i class="cap">Tap floor</i></span><span>Walk there</span><span class="k"><i class="cap">Pinch</i></span><span>Zoom in and out</span><span class="k"><i class="cap">Two fingers</i></span><span>Two fingers, to slide the view</span></div></div>
+<div id="stick" class="hidden"><div id="knob"></div></div>
+<div id="bottom"><button id="jumpBtn" class="hidden">Jump in</button><button id="actBtn" class="hidden"></button><div id="hotrow"><div id="hotbar"></div><button id="bagBtn" aria-label="Bag"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1424" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0v9a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2z" fill="#b48ad6"/><path d="M9 4.5a3 3 0 0 1 6 0"/><rect x="9" y="12" width="6" height="4" rx="1" fill="#f4ecdc"/></svg><span class="lbl">Bag</span><span class="key keysOnly">B</span></button><button id="shopBtn" aria-label="Fix up the house"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1424" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z" fill="#d6b26a"/><rect x="10" y="14" width="4" height="6" fill="#7a2e3a"/></svg><span class="lbl">Fix up the house</span></button></div></div>
+<div id="journalP" class="sheet hidden"><header><i class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#f4ecdc" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h11a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6z" fill="#f4ecdc" stroke="#1b1424"/><path d="M6 3v18M9.5 8h5M9.5 12h5" stroke="#1b1424"/></svg></i><div><h2>Keira's notebook</h2><p class="sub">With notes in the margin by Mila, who was not asked.</p></div><button class="x" id="journalClose" aria-label="Close">✕</button></header><div class="jtabs"></div><div class="jpage"></div></div>
+<div id="bagP" class="sheet hidden"><div id="bagWho"><button data-w="keira">Keira</button><button data-w="mila">Mila</button></div><header><i class="face"></i><div><h2 id="bagTitle">Keira's bag</h2><p class="sub" id="bagSub">Things you've picked up around the house.</p></div><button class="x" id="bagClose" aria-label="Close">✕</button></header><div id="bagGrid"></div><div id="bagInfo"></div></div>
+<div id="wardP" class="sheet hidden"><header><i class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1424" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7a2 2 0 1 0-2-2" /><path d="M12 7v2l8 6a1 1 0 0 1-.6 1.8H4.600a1 1 0 0 1-.6-1.8L12 9" fill="#f4ecdc"/></svg></i><div><h2 id="wardTitle">Clothes</h2><p class="sub">Earned around the house and in the worlds. Worn anywhere.</p></div><button class="x" id="wardClose" aria-label="Close">✕</button></header><div id="wardList"></div></div>
+<div id="shop" class="sheet hidden"><header><i class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1424" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z" fill="#f4ecdc"/><rect x="10" y="14" width="4" height="6" fill="#7a2e3a"/></svg></i><div><h2>Fix up the house</h2><p class="sub">Spend the pennies you bring back from other worlds.</p></div><button class="x" id="shopClose" aria-label="Close">✕</button></header><div id="shopList"></div></div>
+<div id="fridgeP" class="sheet hidden"><header><i class="glyph" style="background-color:#a9d3cf"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1424" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"><rect x="6" y="3" width="12" height="18" rx="2" fill="#f4ecdc"/><path d="M6 10h12M9 6v2M9 13v3"/></svg></i><div><h2>The fridge</h2><p class="sub" id="fridgeNote"></p></div><button class="x" id="fridgeClose" aria-label="Close">✕</button></header><div id="fridgeList"></div><div id="fridgeCold"></div></div>
+<div id="story" class="hidden"></div>
+<div id="mapP" class="hidden"><canvas id="mapCanvas"></canvas><button id="mapClose">Close the map</button></div>
+<div id="card" class="hidden"><i class="ptr"></i><button id="cardX" aria-label="Close">✕</button><div id="cardName"></div><div id="cardText"></div><div id="cardOpts"></div></div>
+<div id="flash"></div>
+<div id="fade"></div>
+<div id="loading">Opening the front door…</div>
+<div id="intro" class="hidden"><div class="card"><div class="kicker">Keira &amp; Mila's</div><h1>Outrageous Adventure</h1><p>This is a normal house. Mostly. Somewhere in here are hidden rooms, and the hidden rooms have doors to other worlds.</p><button id="introGo">Look around</button></div></div>
+</body>
+</html>
