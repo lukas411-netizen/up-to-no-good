@@ -36,6 +36,7 @@
   #who[data-hero=mila]::after { background-image:url(./face-keira.jpg); }
   #who:active, #helpBtn:active { transform:translateY(2px); box-shadow:0 1px 0 var(--ink); }
   #dayPill { left:12px; top:calc(var(--safe-top) + 98px); height:26px; padding:0 10px 0 26px; font-size:12px; font-weight:800; letter-spacing:.04em; box-shadow:0 2px 0 var(--ink); border-width:2px; pointer-events:none; }
+  body.inroad #dayPill { display:none; }
   #dayPill::before { content:''; position:absolute; left:8px; top:6px; width:11px; height:11px; border-radius:50%; background:#f0c24a; box-shadow:0 0 0 2px rgba(240,194,74,.3); }
   #dayPill[data-phase=evening]::before { background:#e2703a; } #dayPill[data-phase=night]::before { background:#f4ecdc; box-shadow:inset -4px -2px 0 #3a2340; }
   #buddy { left:12px; top:calc(var(--safe-top) + 60px); height:30px; padding:0 11px; font-size:13px; font-weight:700; box-shadow:0 2px 0 var(--ink); border-width:2px; }
@@ -142,6 +143,33 @@
   @media (min-width:760px) { #hotbar { grid-template-columns:repeat(12, 46px); } }
   @media (max-width:340px) { #hotbar { grid-template-columns:repeat(6, 40px); } #bottom #hotrow button { width:40px; height:40px; } }
   /* ----- the notebook button, top middle ----- */
+  /* a note held up to read (Tuppence's, Grandpa's) */
+  #paper { position:fixed; inset:0; z-index:34; display:grid; place-items:center; background:rgba(12,9,16,.62); cursor:pointer; animation:paperIn .28s ease-out; }
+  #paper.out { opacity:0; transition:opacity .2s; }
+  @keyframes paperIn { from { opacity:0; } to { opacity:1; } }
+  #paper .pg { width:min(290px,76vw); padding:32px 26px 32px; background:#f3ead2 repeating-linear-gradient(transparent 0 31px, rgba(60,80,120,.14) 31px 32px); color:#2a2030; border-radius:3px; box-shadow:0 14px 40px rgba(0,0,0,.55); rotate:-2deg; text-align:center; animation:pgIn .34s cubic-bezier(.2,1.3,.4,1); }
+  @keyframes pgIn { from { transform:translateY(40px) scale(.9); } to { transform:none; } }
+  #paper.caps .pg { font:800 23px/32px 'Nunito',sans-serif; letter-spacing:.09em; }
+  #paper.hand .pg { font:italic 500 22px/32px 'Fraunces',serif; text-align:left; rotate:1.5deg; color:#3d3a48; width:min(310px,80vw); }
+  /* in the road: swings left today, and how far along */
+  #roadHud { position:fixed; left:0; right:0; margin:0 auto; width:max-content; top:calc(var(--safe-top) + 64px); z-index:5; display:flex; gap:12px; align-items:center; padding:6px 12px; border-radius:16px; border:var(--edge); background:var(--paper); box-shadow:0 3px 0 var(--ink); pointer-events:none; transition:opacity .3s; }
+  #roadHud.hidden { display:none; }
+  #roadHud span { display:flex; align-items:center; gap:5px; } #roadHud svg { width:22px; height:22px; } #roadHud i { font-style:normal; font-size:15px; line-height:1; }
+  #roadHud u { display:block; width:60px; height:11px; border-radius:6px; background:var(--paper2,#e7dabd); border:2px solid var(--ink); overflow:hidden; text-decoration:none; }
+  #roadHud u b { display:block; height:100%; background:#d6b26a; transition:width .25s; }
+  #roadHud .tr u { width:78px; } #roadHud .tr u b { background:#8a5a3c; }
+  #roadHud.low .sw u b { background:#c8403a; }
+  #roadHud button { pointer-events:auto; appearance:none; border:2px solid var(--ink); background:#fffaf0; border-radius:11px; width:38px; height:38px; padding:0; display:grid; place-items:center; font-size:17px; line-height:1; box-shadow:0 2px 0 var(--ink); color:var(--ink); position:relative; }
+  #roadHud button::after { content:''; position:absolute; inset:-5px; }
+  #roadHud button:active { transform:translateY(2px); box-shadow:none; } #roadHud button svg { width:22px; height:22px; }
+  #roadHud .jar.hidden { display:none; } #roadHud .jar .gl { fill:#dfe6e2; } #roadHud .jar .rd { fill:#b9c4c0; }
+  #roadHud .jar.lit { background:#fff6c9; box-shadow:0 2px 0 var(--ink), 0 0 12px 3px rgba(190,240,170,.9); } #roadHud .jar.lit .gl { fill:#e9ffd0; } #roadHud .jar.lit .rd { fill:#c9f58a; }
+  #roadHud .jar em { position:absolute; left:0; right:0; bottom:-9px; display:flex; gap:2px; justify-content:center; } #roadHud .jar em i { width:5px; height:5px; border-radius:50%; background:#b8e86a; border:1.5px solid var(--ink); }
+  #roadHud .tr u { position:relative; overflow:visible; } #roadHud .tr u b { border-radius:4px; } #roadHud .tr u s { position:absolute; top:-3px; bottom:-3px; width:2px; background:var(--ink); }
+  #roadHud .home, #roadHud .face { display:none; } #roadHud.far .home, #roadHud.far .face { display:grid; }
+  #roadHud .end { font:800 13px 'Nunito',sans-serif; background:var(--plum,#3a2340); color:var(--paper); border-radius:7px; padding:3px 5px; }
+  #roadHud.nope { animation:hudNope .3s; } @keyframes hudNope { 25% { translate:-5px 0; } 75% { translate:5px 0; } }
+  body.scene #roadHud, body.intalk #roadHud { opacity:0; }
   #nbBtn { position:fixed; left:50%; margin-left:-50px; top:calc(var(--safe-top) + 9px); z-index:5; width:46px; height:46px; padding:0; border-radius:14px; border:var(--edge); background:var(--paper); box-shadow:0 3px 0 var(--ink); display:grid; place-items:center; }
   #nbBtn svg { width:30px; height:30px; } #nbBtn:active { transform:translateY(2px); box-shadow:0 1px 0 var(--ink); }
   #nbBtn b { position:absolute; right:-7px; top:-7px; min-width:21px; height:21px; padding:0 5px; border-radius:11px; background:var(--keira); color:var(--paper); border:2px solid var(--ink); font:800 12px 'Nunito',sans-serif; display:grid; place-items:center; }
@@ -162,6 +190,18 @@
   .nbPage li { position:relative; display:flex; gap:10px; align-items:flex-start; padding:0 0 12px; }
   .nbPage li > div { flex:1; min-width:0; } .nbPage b { font-weight:700; } .nbPage .jq b, .nbPage .jc b { display:block; font-size:22px; line-height:28px; } .nbPage li span { display:block; opacity:.82; }
   .nbT { margin:0 0 6px; font:700 30px/28px 'Caveat',cursive; text-decoration:underline wavy var(--keira); text-decoration-thickness:1.5px; text-underline-offset:6px; padding-bottom:8px; }
+  .nbFz { display:block; margin:14px auto 0; padding:6px 12px; border:0; background:none; font:700 11px 'Nunito',sans-serif; letter-spacing:.08em; color:rgba(27,20,36,.4); }
+  .jpage em.mila, .nbPage em.mila { display:inline-block; margin:2px 0 0 8px; padding:0 6px; font:700 18px/24px 'Caveat',cursive; font-style:normal; color:#b06a00; background:rgba(234,166,60,.22); border-radius:4px; }
+  .nbS small { font:inherit; opacity:.55; margin-left:6px; }
+  .nbQs { display:grid; gap:8px; margin:2px 0 4px -34px; }
+  .nbQ { position:relative; display:flex; align-items:center; gap:10px; min-height:52px; padding:5px 10px 5px 8px; background:#fff; border:var(--edge); border-radius:10px; box-shadow:2px 3px 0 rgba(27,20,36,.18); }
+  .nbQ > i { flex:none; width:38px; height:38px; border-radius:50%; background:#d5e3ea; border:2px solid var(--ink); display:grid; place-items:center; font-style:normal; font-size:21px; line-height:1; }
+  .nbQ > b { flex:1; min-width:0; font-size:23px; line-height:24px; }
+  .nbQ > u { flex:none; text-decoration:none; padding:0 9px; border:2.5px solid #b2402e; border-radius:6px; color:#b2402e; font:700 25px/30px 'Caveat',cursive; rotate:-7deg; background:rgba(178,64,46,.07); }
+  .nbQ.done > b { opacity:.6; } .nbQ.done > i { background:#f3d98a; }
+  .nbQ em.mila { position:absolute; right:6px; bottom:-11px; margin:0; font-size:16px; line-height:19px; background:#fbe6b8; z-index:1; }
+  .nbQ.unk { min-height:38px; background:transparent; border-style:dashed; border-color:rgba(27,20,36,.3); box-shadow:none; justify-content:center; } .nbQ.unk > i { width:28px; height:28px; background:transparent; border-color:rgba(27,20,36,.3); color:rgba(27,20,36,.4); font:700 20px 'Caveat',cursive; }
+  .nbCl li { gap:8px; padding:0 0 12px; } .nbCl li > i { flex:none; width:34px; height:34px; margin:-3px 0 0 -38px; border-radius:9px; background:#fff; border:2px solid var(--ink); display:grid; place-items:center; font-style:normal; font-size:18px; line-height:1; rotate:-3deg; box-shadow:1px 2px 0 rgba(27,20,36,.18); } .nbCl li:nth-child(even) > i { rotate:2.5deg; }
   .nbS { margin:10px 0 6px; font:800 12px/28px 'Nunito',sans-serif; letter-spacing:.14em; text-transform:uppercase; color:var(--keira); }
   .nbCh li { align-items:center; gap:10px; min-height:44px; padding:0 0 12px; }
   .nbCh .pic { flex:none; width:42px; height:42px; margin-left:-36px; border-radius:11px; border:var(--edge); background:#fff; display:grid; place-items:center; rotate:-3deg; box-shadow:2px 2px 0 rgba(27,20,36,.2); } .nbCh li:nth-child(even) .pic { rotate:2.5deg; } .nbCh .pic svg { width:28px; height:28px; }
@@ -187,6 +227,8 @@
   .nbBtn .sw { flex:none; width:46px; height:26px; border-radius:13px; border:2px solid var(--ink); background:var(--paper2); position:relative; } .nbBtn .sw::after { content:''; position:absolute; left:2px; top:2px; width:18px; height:18px; border-radius:50%; background:var(--ink); transition:left .15s; } .nbBtn .sw.on { background:#9ed0a6; } .nbBtn .sw.on::after { left:22px; }
   .nbLed li { align-items:baseline; gap:8px; padding:0 0 0; min-height:28px; } .nbLed b { flex:none; min-width:62px; color:var(--teal); font-size:22px; } .nbLed span { flex:1; opacity:1 !important; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; } .nbLed em { flex:none; font:700 11px 'Nunito',sans-serif; font-style:normal; opacity:.5; }
   .nbMap { display:block; width:calc(100% + 26px); margin:4px 0 0 -30px; border:var(--edge); border-radius:4px; rotate:-1deg; box-shadow:3px 4px 0 rgba(27,20,36,.2); }
+  .nbPage { overflow-anchor:none; }
+  .nbCorner { display:block; width:calc(100% + 26px); margin:2px 0 10px -30px; rotate:.8deg; filter:drop-shadow(3px 4px 0 rgba(27,20,36,.2)); }
   .nbNoMap { margin:30px 0 0 -30px; text-align:center; opacity:.7; } .nbNoMap svg { width:84px; height:84px; opacity:.6; } .nbNoMap p { margin:6px 20px; }
   .nbPage .jn.let li { display:block; } .nbPage .jn.let b { display:block; font:800 11px/18px 'Nunito',sans-serif; letter-spacing:.12em; text-transform:uppercase; color:var(--keira); font-style:normal; }
   .nbHelp { margin:12px 0 0 -30px; font-family:'Nunito',sans-serif; } .nbHelp .help { margin:0; }
@@ -233,7 +275,7 @@
   .bub[data-who=mila] .name { background:var(--mila); color:var(--ink); }
   .bub .name i { position:absolute; left:-6px; top:-6px; width:34px; height:34px; border-radius:50%; border:2px solid var(--ink); background:url(./face-keira.jpg) center/cover; }
   .bub[data-who=mila] .name i { background-image:url(./face-mila.jpg); }
-  .bub:is([data-who=bertram],[data-who=opal],[data-who=ambrose],[data-who=dot],[data-who=wren]) .name { background:#6b4a2b; padding-left:10px; } .bub:is([data-who=bertram],[data-who=opal],[data-who=ambrose],[data-who=dot],[data-who=wren]) .name i { display:none; }
+  .bub:is([data-who=bertram],[data-who=opal],[data-who=ambrose],[data-who=dot],[data-who=wren],[data-who=tuppence]) .name { background:#6b4a2b; padding-left:10px; } .bub:is([data-who=bertram],[data-who=opal],[data-who=ambrose],[data-who=dot],[data-who=wren],[data-who=tuppence]) .name i { display:none; }
   .bub .more { position:absolute; right:12px; bottom:3px; width:0; height:0; border:6px solid transparent; border-top:8px solid var(--keira); border-bottom:0; opacity:0; }
   .bub.done .more { opacity:1; animation:nudge .8s infinite; } .bub.auto .more { display:none; }
   .bub b { color:#5b2a6b; font-weight:800; }
@@ -362,7 +404,7 @@
   @keyframes heart { from { transform:translate(-50%,0) scale(.6); opacity:1; } to { transform:translate(-50%,-90px) scale(1.2); opacity:0; } }
   @media (prefers-reduced-motion: reduce) { .bubIn, .sheet, #card, .stamp, .shout .ch.on { animation:none !important; } }
 </style>
-  <script type="module" crossorigin src="./assets/index-DJgGaKDz.js"></script>
+  <script type="module" crossorigin src="./assets/index-NFmM_YPY.js"></script>
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -395,6 +437,6 @@
 <div id="flash"></div>
 <div id="fade"></div>
 <div id="loading">Opening the front door…</div>
-<div id="intro" class="hidden"><div class="card"><div class="kicker">Keira &amp; Mila's</div><h1>Outrageous Adventure</h1><p>This is a normal house. Mostly. Somewhere in here are hidden rooms, and the hidden rooms have doors to other worlds.</p><button id="introGo">Look around</button></div></div>
+<div id="intro" class="hidden"><div class="card"><div class="kicker">Keira &amp; Mila's</div><h1>Outrageous Adventure</h1><p>This is a normal house. Mostly. The couch hums, and nobody knows why. Yet.</p><button id="introGo">Look around</button></div></div>
 </body>
 </html>

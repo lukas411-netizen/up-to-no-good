@@ -6,9 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#2f8cff">
 <title>Couch World</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Fredoka:wght@500;700&family=Nunito:wght@700;800&family=Abril+Fatface&family=Alfa+Slab+One&family=Permanent+Marker&family=Special+Elite&family=Titan+One&display=swap" rel="stylesheet">
 <style>
   :root {
     --pink: #ff3d8b; --cyan: #2fd4ff; --yellow: #ffe14a; --orange: #ff8a1f; --purple: #7a3cff; --ink: #2a0b4a;
@@ -484,9 +481,17 @@
   .fromhouse, .fromhouse body, .fromhouse #loading { background:#05030a !important; }
   .fromhouse #loading { color:transparent; }
   .fromhouse #loading::after { margin-top:0; width:26px; height:26px; border-width:3px; border-color:rgba(251,248,240,.35); border-right-color:transparent; }
+
+  /* ship round: swap badges wear the girls' faces in their house colours; the way home is a full ticket */
+  #team .keira { background:#7a2e3a !important; } #team .mila { background:#eaa63c !important; }
+  #team button b.pic { position:absolute; inset:4px; border-radius:50%; background:center/cover no-repeat; font-size:0 !important; line-height:0 !important; }
+  #team button:has(b.pic) i { display:none; }
+  #overHouse.gobtn { background:var(--card) !important; color:var(--ink) !important; rotate:3deg; font:400 30px/66px var(--slab) !important; box-shadow:none !important; width:100% !important; height:66px !important; padding:0 0 0 44px !important; letter-spacing:.06em !important; clip-path:none; }
+  #overHouse.gobtn::after { content:'No. 0013'; }
 </style>
-  <script type="module" crossorigin src="./assets/bob-uJgge3KL.js"></script>
-  <script type="module" crossorigin src="./assets/main-DC6RQm1U.js"></script>
+  <script type="module" crossorigin src="./assets/bob-1v9HGPif.js"></script>
+  <script type="module" crossorigin src="./assets/main-BtGfgf6i.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-tl7LHQLU.css">
 </head>
 <body data-edition="bday">
 <script>if (/[?&]from=house\b/.test(location.search)) document.documentElement.classList.add("fromhouse");</script>
@@ -495,7 +500,7 @@
 <div id="loading">Loading…</div>
 
 <div id="title">
-  <div class="kicker">THE COUCH WORLD</div>
+  <div class="kicker">COUCH WORLD</div>
   <h1 class="logo2" aria-label="Couch World"><span class="l1"><i class="scr" data-n="3" style="--r:-7deg;--d:-.3s">C</i><i class="btn4" style="--r:4deg;--d:-1.1s">O</i><i class="mag" style="color:#e2574c;--r:-3deg;--d:-2s">U</i><i class="news" style="--r:6deg;--d:-.7s">C</i><i class="blk" style="--r:-5deg;--d:-1.6s">H</i></span><span class="l2"><i class="mag" style="color:#f2c14e;--r:5deg;--d:-.2s">W</i><i class="btn4 pink" style="--r:-6deg;--d:-1.4s">O</i><i class="scr" data-n="1" style="--r:4deg;--d:-2.3s">R</i><i class="news" style="--r:-4deg;--d:-.9s">L</i><i class="mag" style="color:#6fc3b6;--r:7deg;--d:-1.8s">D</i></span></h1>
 </div>
 
@@ -524,7 +529,7 @@
   <button id="pauseBtn" aria-label="Pause">II</button>
   <div id="height">0</div>
   <div class="chip"><span class="nut"></span><span id="hudBolts">0</span></div>
-  <div id="boostPip">ROCKET READY</div>
+  <div id="boostPip"></div>
 </div>
 <div id="kick" class="hidden" aria-hidden="true"><svg viewBox="0 0 60 60"><circle class="bg" cx="30" cy="30" r="25"/><circle class="fg" cx="30" cy="30" r="25" transform="rotate(-90 30 30)"/>
   <polygon class="ic" points="32.7,16.8 34.0,24.0 41.3,22.5 37.1,28.6 43.2,32.7 36.0,34.0 37.5,41.3 31.4,37.1 27.3,43.2 26.0,36.0 18.7,37.5 22.9,31.4 16.8,27.3 24.0,26.0 22.5,18.7 28.6,22.9"/></svg></div>
