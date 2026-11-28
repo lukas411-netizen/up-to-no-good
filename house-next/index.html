@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#15111c">
-<title>The House</title>
+<title>The Thirteenth Hour</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,800;1,9..144,600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
@@ -231,6 +231,13 @@
   .nbCorner { display:block; width:calc(100% + 26px); margin:2px 0 10px -30px; rotate:.8deg; filter:drop-shadow(3px 4px 0 rgba(27,20,36,.2)); }
   .nbNoMap { margin:30px 0 0 -30px; text-align:center; opacity:.7; } .nbNoMap svg { width:84px; height:84px; opacity:.6; } .nbNoMap p { margin:6px 20px; }
   .nbPage .jn.let li { display:block; } .nbPage .jn.let b { display:block; font:800 11px/18px 'Nunito',sans-serif; letter-spacing:.12em; text-transform:uppercase; color:var(--keira); font-style:normal; }
+  .nbSw { margin-top:8px; } .nbOver { border-color:#8a3a2e; color:#8a3a2e; background:var(--paper2); box-shadow:0 3px 0 #8a3a2e; height:42px; font-size:15px; } .nbBack { height:42px; font-size:15px; background:var(--paper2); }
+  .nbHs { display:flex; gap:2px; justify-content:center; text-decoration:none; } .nbH { width:13px; height:13px; fill:none; stroke:rgba(27,20,36,.55); stroke-width:2.2; stroke-linejoin:round; } .nbH.on { fill:#c8403a; stroke:var(--ink); }
+  .nbPol button .nbHs { margin:3px 0 -3px; }
+  .nbFavRow { display:flex; align-items:center; gap:8px; margin-top:8px; padding-top:8px; border-top:2px dashed rgba(27,20,36,.25); font:800 14px 'Nunito',sans-serif; } .nbFavRow .nbH { width:22px; height:22px; }
+  .nbFavRow i { flex:none; width:30px; height:30px; display:grid; place-items:center; font-style:normal; font-size:22px; } .nbFavRow i svg, .nbFavRow i .ico { width:28px; height:28px; } .nbFavRow i.q { font:800 22px 'Fraunces',serif; opacity:.45; }
+  .nbFavRow em { flex:1; font-style:normal; min-width:0; } .nbFavRow u { flex:none; text-decoration:none; padding:2px 8px; border-radius:10px; border:2px solid var(--ink); background:var(--paper2); font-size:13px; } .nbFavRow u.got { background:#9ed0a6; }
+  .nbFav .pay { background:var(--paper2); } .nbFav li.got .pay { background:#9ed0a6; } .nbFav .pic .ico { width:30px; height:30px; font-size:24px; }
   .nbHelp { margin:12px 0 0 -30px; font-family:'Nunito',sans-serif; } .nbHelp .help { margin:0; }
   .nbPage[data-tab=how] { background-image:none; }
   @media (hover:hover) and (pointer:fine) and (min-width:900px) { #nbP { width:500px; border-radius:6px 16px 16px 16px; padding-bottom:14px; } .nbPage { height:min(62vh, 540px); } #nbBtn { margin-left:-23px; } }
@@ -398,9 +405,8 @@
   @keyframes no13 { 25% { transform:translateX(-10px); } 75% { transform:translateX(10px); } }
   #fade { position:fixed; inset:0; background:#0c0a10; opacity:0; pointer-events:none; transition:opacity .4s ease; z-index:24; }
   #fade.on { opacity:1; }
-  #loading, #intro { position:fixed; inset:0; display:grid; place-items:center; background:radial-gradient(circle at 50% 40%,#2c2140,#120d18); z-index:32; text-align:center; padding:24px; }
+  #loading { position:fixed; inset:0; display:grid; place-items:center; background:radial-gradient(circle at 50% 40%,#2c2140,#120d18); z-index:32; text-align:center; padding:24px; }
   #loading { font-family:'Fraunces',serif; font-size:22px; opacity:.85; }
-  #intro { background:rgba(12,9,16,.55); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); }
   .card { max-width:360px; }
   .card .kicker { letter-spacing:.2em; text-transform:uppercase; font-size:12px; opacity:.7; }
   .card h1 { font-family:'Fraunces',serif; font-weight:800; font-size:40px; line-height:1; margin:10px 0 12px; color:#f6e6bd; text-shadow:0 2px 0 #3a2340, 0 10px 30px rgba(0,0,0,.6); }
@@ -419,7 +425,7 @@
   @keyframes heart { from { transform:translate(-50%,0) scale(.6); opacity:1; } to { transform:translate(-50%,-90px) scale(1.2); opacity:0; } }
   @media (prefers-reduced-motion: reduce) { .bubIn, .sheet, #card, .stamp, .shout .ch.on { animation:none !important; } }
 </style>
-  <script type="module" crossorigin src="./assets/index-BnmqGYpX.js"></script>
+  <script type="module" crossorigin src="./assets/index-DeKkO_7K.js"></script>
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -440,8 +446,8 @@
 <div id="bottom"><button id="jumpBtn" class="hidden">Jump in</button><button id="actBtn" class="hidden"></button><div id="toolbar" class="hidden"></div><div id="hotrow"><div id="hotbar"></div><button id="bagBtn" aria-label="Bag"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1424" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0v9a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2z" fill="#b48ad6"/><path d="M9 4.5a3 3 0 0 1 6 0"/><rect x="9" y="12" width="6" height="4" rx="1" fill="#f4ecdc"/></svg><span class="lbl">Bag</span><span class="key keysOnly">B</span></button><button id="shopBtn" aria-label="Fix up the house"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1424" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z" fill="#d6b26a"/><rect x="10" y="14" width="4" height="6" fill="#7a2e3a"/></svg><span class="lbl">Fix up the house</span></button></div></div>
 <div id="journalP" class="sheet hidden"><header><i class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#f4ecdc" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h11a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6z" fill="#f4ecdc" stroke="#1b1424"/><path d="M6 3v18M9.5 8h5M9.5 12h5" stroke="#1b1424"/></svg></i><div><h2>Keira's notebook</h2><p class="sub">With notes in the margin by Mila, who was not asked.</p></div><button class="x" id="journalClose" aria-label="Close">✕</button></header><div class="jtabs"></div><div class="jpage"></div></div>
 <div id="bagP" class="sheet hidden"><div id="bagWho"><button data-w="keira">Keira</button><button data-w="mila">Mila</button></div><header><i class="face"></i><div><h2 id="bagTitle">Keira's bag</h2><p class="sub" id="bagSub">Things you've picked up around the house.</p></div><button class="x" id="bagClose" aria-label="Close">✕</button></header><div id="bagGrid"></div><div id="bagInfo"></div></div>
-<div id="wardP" class="sheet hidden"><header><i class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1424" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7a2 2 0 1 0-2-2" /><path d="M12 7v2l8 6a1 1 0 0 1-.6 1.8H4.600a1 1 0 0 1-.6-1.8L12 9" fill="#f4ecdc"/></svg></i><div><h2 id="wardTitle">Clothes</h2><p class="sub">Earned around the house and in the worlds. Worn anywhere.</p></div><button class="x" id="wardClose" aria-label="Close">✕</button></header><div id="wardList"></div></div>
-<div id="shop" class="sheet hidden"><header><i class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1424" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z" fill="#f4ecdc"/><rect x="10" y="14" width="4" height="6" fill="#7a2e3a"/></svg></i><div><h2>Fix up the house</h2><p class="sub">Spend the pennies you bring back from other worlds.</p></div><button class="x" id="shopClose" aria-label="Close">✕</button></header><div id="shopList"></div></div>
+<div id="wardP" class="sheet hidden"><header><i class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1424" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7a2 2 0 1 0-2-2" /><path d="M12 7v2l8 6a1 1 0 0 1-.6 1.8H4.600a1 1 0 0 1-.6-1.8L12 9" fill="#f4ecdc"/></svg></i><div><h2 id="wardTitle">Clothes</h2><p class="sub">Earned around the house and inside the couch.</p></div><button class="x" id="wardClose" aria-label="Close">✕</button></header><div id="wardList"></div></div>
+<div id="shop" class="sheet hidden"><header><i class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1424" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z" fill="#f4ecdc"/><rect x="10" y="14" width="4" height="6" fill="#7a2e3a"/></svg></i><div><h2>Fix up the house</h2><p class="sub">Chores, the garden and the couch all pay.</p></div><button class="x" id="shopClose" aria-label="Close">✕</button></header><div id="shopList"></div></div>
 <div id="fridgeP" class="sheet hidden"><header><i class="glyph" style="background-color:#a9d3cf"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1424" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"><rect x="6" y="3" width="12" height="18" rx="2" fill="#f4ecdc"/><path d="M6 10h12M9 6v2M9 13v3"/></svg></i><div><h2>The fridge</h2><p class="sub" id="fridgeNote"></p></div><button class="x" id="fridgeClose" aria-label="Close">✕</button></header><div id="fridgeList"></div><div id="fridgeCold"></div></div>
 <div id="nbP" class="sheet hidden"><div class="nbTabs"></div><button class="x" id="nbClose" aria-label="Close">✕</button><div class="nbPage"></div></div>
 <div id="recP" class="sheet hidden"><header><i class="glyph" style="background-color:#1b1424"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#1b1424" stroke="#f4ecdc" stroke-width="1.500"/><circle cx="12" cy="12" r="3.500" fill="#d6503a"/><circle cx="12" cy="12" r=".9" fill="#f4ecdc"/></svg></i><div><h2>Records</h2><p class="sub">It plays until tomorrow.</p></div><button class="x" id="recClose" aria-label="Close">✕</button></header><div id="recList"></div></div>
@@ -452,6 +458,6 @@
 <div id="flash"></div>
 <div id="fade"></div>
 <div id="loading">Opening the front door…</div>
-<div id="intro" class="hidden"><div class="card"><div class="kicker">Keira &amp; Mila's</div><h1>Outrageous Adventure</h1><p>This is a normal house. Mostly. The couch hums, and nobody knows why. Yet.</p><button id="introGo">Look around</button></div></div>
+
 </body>
 </html>
