@@ -275,10 +275,10 @@
   .bub[data-who=mila] .name { background:var(--mila); color:var(--ink); }
   .bub .name i { position:absolute; left:-6px; top:-6px; width:34px; height:34px; border-radius:50%; border:2px solid var(--ink); background:url(./face-keira.jpg) center/cover; }
   .bub[data-who=mila] .name i { background-image:url(./face-mila.jpg); }
-  .bub:is([data-who=bertram],[data-who=opal],[data-who=ambrose],[data-who=dot],[data-who=wren],[data-who=tuppence]) .name { background:#6b4a2b; padding-left:10px; } .bub:is([data-who=bertram],[data-who=opal],[data-who=ambrose],[data-who=dot],[data-who=wren],[data-who=tuppence]) .name i { display:none; }
+  .bub:is([data-who=bertram],[data-who=opal],[data-who=ambrose],[data-who=dot],[data-who=wren],[data-who=tuppence],[data-who='mr nobody']) .name { background:#6b4a2b; padding-left:10px; } .bub:is([data-who=bertram],[data-who=opal],[data-who=ambrose],[data-who=dot],[data-who=wren],[data-who=tuppence],[data-who='mr nobody']) .name i { display:none; }
   .bub .more { position:absolute; right:12px; bottom:3px; width:0; height:0; border:6px solid transparent; border-top:8px solid var(--keira); border-bottom:0; opacity:0; }
   .bub.done .more { opacity:1; animation:nudge .8s infinite; } .bub.auto .more { display:none; }
-  .bub b { color:#5b2a6b; font-weight:800; }
+  .bub b { color:#5b2a6b; font-weight:800; } .bub .name { white-space:nowrap; }
   .ch { opacity:0; } .ch.on { opacity:1; }
   .shout { font-style:normal; font-weight:800; color:var(--keira); display:inline-block; white-space:nowrap; } .shout .ch { display:inline-block; } .shout .ch.on { animation:shake .32s; }
   .bub.thought .bubIn { border-style:dashed; padding-top:13px; font-weight:700; font-size:16px; }
@@ -381,6 +381,21 @@
   #flash { position:fixed; inset:0; background:radial-gradient(circle,#eef3ff,#9fb2cf 40%,#0a1322); opacity:0; pointer-events:none; transition:opacity .4s; z-index:20; }
   #flash.on { opacity:1; }
   #flash.dark { background:#05030a; }
+  /* number 13: the count before the two keys turn. Paper and ink, like everything in Lakeview. */
+  #count13 { position:fixed; inset:0; z-index:23; display:flex; flex-direction:column; align-items:center; padding-top:calc(var(--safe-top) + 12vh); touch-action:none; cursor:pointer; }
+  #count13 .say { display:flex; align-items:center; gap:10px; min-width:120px; justify-content:center; padding:10px 26px; border-radius:22px; background:var(--paper); border:var(--edge); box-shadow:var(--drop); transition:transform .16s ease, opacity .16s; }
+  #count13 .say.none { opacity:0; }
+  #count13 .say b { font:700 clamp(34px, 9vw, 64px)/1.05 'Fraunces',serif; color:var(--ink); }
+  #count13 .say i { display:none; width:clamp(34px, 8vw, 52px); height:clamp(34px, 8vw, 52px); border-radius:50%; border:2.5px solid var(--ink); background:center/cover; flex:none; }
+  #count13 .say i.k { background-image:url(./face-keira.jpg); } #count13 .say i.m { background-image:url(./face-mila.jpg); }
+  #count13 .say.k i.k, #count13 .say.m i.m, #count13 .say.now i { display:block; }
+  #count13 .say.now { background:#ffd98a; animation:now13 .5s ease-in-out infinite alternate; }
+  #count13 .say.no { animation:no13 .32s; }
+  #count13 .pips { display:flex; gap:16px; margin-top:16px; }
+  #count13 .pips i { width:15px; height:15px; border-radius:50%; border:2.5px solid var(--ink); background:rgba(244,236,220,.35); box-shadow:0 2px 0 var(--ink); }
+  #count13 .pips i.on { background:var(--paper); } #count13 .pips i.on:last-child { background:#ffd98a; }
+  @keyframes now13 { from { transform:scale(1.06); } to { transform:scale(1.2); } }
+  @keyframes no13 { 25% { transform:translateX(-10px); } 75% { transform:translateX(10px); } }
   #fade { position:fixed; inset:0; background:#0c0a10; opacity:0; pointer-events:none; transition:opacity .4s ease; z-index:24; }
   #fade.on { opacity:1; }
   #loading, #intro { position:fixed; inset:0; display:grid; place-items:center; background:radial-gradient(circle at 50% 40%,#2c2140,#120d18); z-index:32; text-align:center; padding:24px; }
@@ -404,7 +419,7 @@
   @keyframes heart { from { transform:translate(-50%,0) scale(.6); opacity:1; } to { transform:translate(-50%,-90px) scale(1.2); opacity:0; } }
   @media (prefers-reduced-motion: reduce) { .bubIn, .sheet, #card, .stamp, .shout .ch.on { animation:none !important; } }
 </style>
-  <script type="module" crossorigin src="./assets/index-NFmM_YPY.js"></script>
+  <script type="module" crossorigin src="./assets/index-BWfMFrDw.js"></script>
 </head>
 <body>
 <canvas id="c"></canvas>
