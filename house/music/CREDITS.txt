@@ -1,4 +1,3 @@
-Instrument recordings (piano, acoustic guitar, xylophone; the h-*.mp3 harp notes are no longer used) are from tonejs-instruments by Nicholaus Brosowsky,
-https://github.com/nbrosowsky/tonejs-instruments, samples licensed CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/),
-built from public domain sources: VSCO 2 Community Edition (Versilian Studios) and the University of Iowa Musical Instrument Samples.
-Trimmed and re-encoded for this game. This credit must appear in the game's credits.
+House songs: original music written for this game. Rendered with FluidSynth using the
+MuseScore General HQ soundfont by S. Christian Collins (MIT licence; includes Fluid R3 Mono GM, MIT,
+and CC0 / public domain samples from VSCO 2 Community Edition and others).
