@@ -142,6 +142,24 @@
   @media (min-width:760px) { #hotbar { grid-template-columns:repeat(12, 46px); } }
   @media (max-width:340px) { #hotbar { grid-template-columns:repeat(6, 40px); } #bottom #hotrow button { width:40px; height:40px; } }
   /* ----- the notebook button, top middle ----- */
+  /* a note held up to read (Tuppence's, Grandpa's) */
+  #paper { position:fixed; inset:0; z-index:34; display:grid; place-items:center; background:rgba(12,9,16,.62); cursor:pointer; animation:paperIn .28s ease-out; }
+  #paper.out { opacity:0; transition:opacity .2s; }
+  @keyframes paperIn { from { opacity:0; } to { opacity:1; } }
+  #paper .pg { width:min(290px,76vw); padding:32px 26px 32px; background:#f3ead2 repeating-linear-gradient(transparent 0 31px, rgba(60,80,120,.14) 31px 32px); color:#2a2030; border-radius:3px; box-shadow:0 14px 40px rgba(0,0,0,.55); rotate:-2deg; text-align:center; animation:pgIn .34s cubic-bezier(.2,1.3,.4,1); }
+  @keyframes pgIn { from { transform:translateY(40px) scale(.9); } to { transform:none; } }
+  #paper.caps .pg { font:800 23px/32px 'Nunito',sans-serif; letter-spacing:.09em; }
+  #paper.hand .pg { font:italic 500 22px/32px 'Fraunces',serif; text-align:left; rotate:1.5deg; color:#3d3a48; width:min(310px,80vw); }
+  /* in the road: swings left today, and how far along */
+  #roadHud { position:fixed; left:0; right:0; margin:0 auto; width:max-content; top:calc(var(--safe-top) + 64px); z-index:5; display:flex; gap:12px; align-items:center; padding:6px 12px; border-radius:16px; border:var(--edge); background:var(--paper); box-shadow:0 3px 0 var(--ink); pointer-events:none; transition:opacity .3s; }
+  #roadHud.hidden { display:none; }
+  #roadHud span { display:flex; align-items:center; gap:5px; } #roadHud svg { width:22px; height:22px; } #roadHud i { font-style:normal; font-size:15px; line-height:1; }
+  #roadHud u { display:block; width:60px; height:11px; border-radius:6px; background:var(--paper2,#e7dabd); border:2px solid var(--ink); overflow:hidden; text-decoration:none; }
+  #roadHud u b { display:block; height:100%; background:#d6b26a; transition:width .25s; }
+  #roadHud .tr u { width:78px; } #roadHud .tr u b { background:#8a5a3c; }
+  #roadHud.low .sw u b { background:#c8403a; }
+  #roadHud.nope { animation:hudNope .3s; } @keyframes hudNope { 25% { translate:-5px 0; } 75% { translate:5px 0; } }
+  body.scene #roadHud, body.intalk #roadHud { opacity:0; }
   #nbBtn { position:fixed; left:50%; margin-left:-50px; top:calc(var(--safe-top) + 9px); z-index:5; width:46px; height:46px; padding:0; border-radius:14px; border:var(--edge); background:var(--paper); box-shadow:0 3px 0 var(--ink); display:grid; place-items:center; }
   #nbBtn svg { width:30px; height:30px; } #nbBtn:active { transform:translateY(2px); box-shadow:0 1px 0 var(--ink); }
   #nbBtn b { position:absolute; right:-7px; top:-7px; min-width:21px; height:21px; padding:0 5px; border-radius:11px; background:var(--keira); color:var(--paper); border:2px solid var(--ink); font:800 12px 'Nunito',sans-serif; display:grid; place-items:center; }
@@ -245,7 +263,7 @@
   .bub[data-who=mila] .name { background:var(--mila); color:var(--ink); }
   .bub .name i { position:absolute; left:-6px; top:-6px; width:34px; height:34px; border-radius:50%; border:2px solid var(--ink); background:url(./face-keira.jpg) center/cover; }
   .bub[data-who=mila] .name i { background-image:url(./face-mila.jpg); }
-  .bub:is([data-who=bertram],[data-who=opal],[data-who=ambrose],[data-who=dot],[data-who=wren]) .name { background:#6b4a2b; padding-left:10px; } .bub:is([data-who=bertram],[data-who=opal],[data-who=ambrose],[data-who=dot],[data-who=wren]) .name i { display:none; }
+  .bub:is([data-who=bertram],[data-who=opal],[data-who=ambrose],[data-who=dot],[data-who=wren],[data-who=tuppence]) .name { background:#6b4a2b; padding-left:10px; } .bub:is([data-who=bertram],[data-who=opal],[data-who=ambrose],[data-who=dot],[data-who=wren],[data-who=tuppence]) .name i { display:none; }
   .bub .more { position:absolute; right:12px; bottom:3px; width:0; height:0; border:6px solid transparent; border-top:8px solid var(--keira); border-bottom:0; opacity:0; }
   .bub.done .more { opacity:1; animation:nudge .8s infinite; } .bub.auto .more { display:none; }
   .bub b { color:#5b2a6b; font-weight:800; }
@@ -374,7 +392,7 @@
   @keyframes heart { from { transform:translate(-50%,0) scale(.6); opacity:1; } to { transform:translate(-50%,-90px) scale(1.2); opacity:0; } }
   @media (prefers-reduced-motion: reduce) { .bubIn, .sheet, #card, .stamp, .shout .ch.on { animation:none !important; } }
 </style>
-  <script type="module" crossorigin src="./assets/index-C2DWyONb.js"></script>
+  <script type="module" crossorigin src="./assets/index-DUGcLaAf.js"></script>
 </head>
 <body>
 <canvas id="c"></canvas>
